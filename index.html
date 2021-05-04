@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://mbticontents.netlify.app/">
+    <title>육아 성향 테스트</title>
+    <meta name="description" content="당신의 육아 스타일은?">
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="육아 성향 테스트">
+    <meta property="og:description" content="당신의 육아 스타일은?">
+    <meta property="og:image" content="http://mbticontents.netlify.app/img/appa.jpg">
+    <meta property="og:url" content="http://mbticontents.netlify.app/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+    <!-- 시작화면 -->
+    <article class="start">
+        <h1 class="mt-5 text-center">MBTI로 보는 당신의 육아 성향 테스트</h1>
+        <button type="button" class="btn btn-primary mt-5" onclick='start();'>테스트 시작하기</button>
+    </article>
+    <!-- 문제화면 -->
+    <article class="question">
+        <div class="progress mt-5">
+            <div class="progress-bar" role="progressbar" style="width: calc(100/12*0%)"></div>
+        </div>
+        <h2 id="title" class="text-center mt-5">문제</h2>
+        <input id="type" type="hidden" value="EI">
+        <button id="A" type="button" class="btn btn-primary mt-5">Primary</button>
+        <button id="B" type="button" class="btn btn-secondary mt-5">Primary</button>
+    </article>
+    <!-- 결과화면 -->
+    <article class="result">
+        <img id="img" class="rounded-circle mt-5" src="lion.jpg" alt="animal">
+        <h2 id="animal" class="text-center mt-5">MBTI 성향</h2>
+        <h3 id="explain" class="text-center mt-5">좋은점</h3>
+        <h3 id="explain2" class="text-center mt-5">나쁜점</h3>
+        <!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="share addthis_inline_share_toolbox"></div>
+    </article>
+    <article class="kakao_ad mt-5">
+        <ins class="kakao_ad_area" style="display:none;" 
+            data-ad-unit    = "DAN-GMmltHMuUP8Mt9J7" 
+            data-ad-width   = "320" 
+            data-ad-height  = "100"></ins> 
+    </article>
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    <input type="hidden" id="EI" value="0">
+    <input type="hidden" id="SN" value="0">
+    <input type="hidden" id="TF" value="0">
+    <input type="hidden" id="JP" value="0">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    
+    <!-- 자바스크립트 시작 -->
+    <script>
+        /* 시작 번호 */
+        var num = 1;
+        
+        var q = {
+            /* 1: {"title": "당신의 에너지 방향은?", "type": "EI", "A": "넓은 대인관계, 사교적, 정열적, 활동적", "B": "깊은 대인관계, 조용하고 신중, 이해하고 경험"},
+            2: {"title": "당신의 인식 알고리즘은?", "type": "SN", "A": "오감에 의존, 실제 경험중시, 정확한 일처리", "B": "영감에 의존, 미래지향적, 신속한 일처리?"},
+            3: {"title": "당신의 판단 알고리즘은.", "type": "TF", "A": "진실과 사실 중시, 분석적, 객관적 판단", "B": "관계에 중심, 상황적 판단"},
+            4: {"title": "당신의 생활양식은", "type": "JP", "A": "분명한 목적과 방향, 기한 엄수", "B": "상황에 따라 일정변경, 자율적, 융통성"} */
+            1: {"title": "그놈의 코로나 참 답답하다. 뭐하고 놀지?", "type": "EI", "A": "심심한데 비대면 파티나 해볼까?", "B": "잘됐다. 집에서 밀린 예능이나 보자."},
+            2: {"title": "벌써 저녁시간인가... 오늘 뭐먹지?", "type": "EI", "A": "카톡으로 애들한테 한번 물어볼까?", "B": "네이버로 검색이나 한번 해볼까."},
+            3: {"title": "갑자기 화상회의라니, 그런데 나보고 의견을 말하라고?", "type": "EI", "A": "뭐라도 얘기하고 보자", "B": "아.. 마이크 고장내고 싶다."},
+            4: {"title": "지난번에 기획했던 세미나를 또 해보라고 하는 부장님. 당신의 선택은?", "type": "SN", "A": "지난번에 잘 됐으니 기획서를 재활용 하자", "B": "이번엔 무슨 내용으로 놀라게 할까??"},
+            5: {"title": "바쁘게 일을 하고 있는데 누군가가 일을 또 시킨다. 아 어떻게 해야 하지?", "type": "SN", "A": "지금 하고 있는 일이 있으니, 지금 못한다고 얘기하자.", "B": "이거 대충 끝내고 저거 해야겠다"},
+            6: {"title": "내일 아이 김밥을 싸줘야 한다. 이번엔 어떤 김밥을 싸볼까?", "type": "SN", "A": "지난 번에 쌌던 김밥을 싸줘야 겠다.", "B": "아 이번엔 못싸줄 거 같은데, 김밥집에 예약해놓자."},
+            7: {"title": "다음주에 놀러가기로 했는데.. 어디로 놀러가지?", "type": "TF", "A": "그냥 나 혼자 결정하지 뭐. 요즘 핫한 곳을 인스타로 찾아볼까?", "B": "가족에게 물어보고 결정해야 겠다."},
+            8: {"title": "유재석이란 사람은 가정에서도 멋진 아빠일까?", "type": "TF", "A": "예능에선 잘하지만, 가정에서는 또 모르는거지", "B": "저렇게 배려심이 많은데, 집에서도 잘하겠지"},
+            9: {"title": "아.. 게임용 컴퓨터 사야하는데 뭐 사지?", "type": "TF", "A": "다나와 사이트에 가서 세부적으로 비교한다.", "B": "제일 핫한 거 몇개 중에 고른다."},
+            10: {"title": "재택근무를 하고 있다. 당신의 아이가 놀자고 한다면?", "type": "JP", "A": "안돼. 회사 일중이야.", "B": "어차피 일도 안됐는데, 조금만 아이랑 놀아줄까?"},
+            11: {"title": "다음주 여행가기로 했는데, 갑자기 일이 생겼다 어쩌지?", "type": "JP", "A": "어떻게든 여행가기로 했으니 가자. 일을 뒤로 미룬다.", "B": "한번 얘기해보고 결정해 봐야겠다."},
+            12: {"title": "당신의 부하직원이 내일까지 작성해오기로 한 보고서 기한을 늘려달라고 한다면?", "type": "JP", "A": "아니. 미리 얘기했어야지... 하루밖에 안남았는데?", "B": "그래. 한번 보고 결정할까?"},
+        }
+        var result = {
+            "ISTJ": {"animal": "당신은 <strong>ISTJ!! 충실한 부모</strong>", "explain": "좋은 점: 이 부모들은 아이들에게 일관성, 일상 및 조직을 제공합니다. 자녀들에게 높은 목표를 가지고 있으며 자녀가 그러한 목표를 달성하도록 돕기 위해 실행 가능한 조치를 취하고 심지어 자녀의 필요를 자신의 필요보다 우선시합니다. 그들은 가족을 위한 전통을 만드는 것을 좋아하고 아이들을 위한 기억에 남는 어린 시절을 만들기 위해 열심히 일합니다. 이 아빠는 세부사항을 세심히 챙기며 모든 경우에 대한 계획을 가지고 있습니다.", "explain2": "나쁜 점: 부모가 되는 것에 대해 종종 좌절 할 수 있습니다. 일반적으로 자녀가 만드는 엉망진창을 좋아하지 않으며 일상에서 벗어나는 것을 좋아하지 않습니다. 때로 아기를 낳는 초기 단계는 일상, 논리 및 질서가 모두 창 밖으로 던져지기 때문에 ISTJ에게 가장 어렵습니다. 자녀가 성장하는데 있어서 때때로 너무 높은 기대치를 가지고 있기 때문에 어려움을 겪습니다. 자녀가 순종하지 않으면 쉽게 화를 낼 수 있습니다.", "img": "ISTJ.jpg"},
+            "ISFJ": {"animal": "당신은 <strong>ISFJ!! 양육 부모</strong>", "explain": "좋은 점: 당신은 실용적이고 실무적이고 신뢰할 수 있는 부모입니다. 영유아와 함께 가장 바쁘고 필요로하는 모든 것을 해야한다고 생각해서 노력합니다. 감정적, 육체적 고통에서 자녀들과 공감하고, 가능하면 스스로 부담을 지길 원합니다. 자녀를 사회의 생산적인 구성원으로 키우고 자녀와 잘 소통하길 원합니다.", "explain2": "나쁜 점: 때때로 배우자든 자녀든 자녀에게 하는 모든 일에 압도당해 감사하다는 생각을 잘 하지 않습니다. 자녀가 실수를 반복하고 우유부단해 할 때 자녀를 위해 모든 것을 하고 싶어하지만, 뜻대로 되지 않는 것에 대해 실망합니다.", "img": "ISFJ.jpg"},
+            "INFJ": {"animal": "당신은 <strong>INFJ!! 선구적인 부모</strong>", "explain": "좋은 점: 높은 도덕적 가치를 갖고 사회의 생산적인 구성원이 될 독립적인 자녀를 양육하고자 합니다. 자녀의 필요 사항에 대해 매우 주의를 기울이며, 자녀가 여러 명일 경우 개개인의 차별성을 확인하려고 노력합니다. 또한 자녀가 어떻게 될지 꿈꾸며 자녀의 강점을 키우려고 노력합니다.", "explain2": "나쁜 점: 행동에 대한 기대치가 높기 때문에 강렬하고 때로는 가혹할 수 있습니다. 또한, 자녀들이 조금이라도 부족한 면이 있을 때 그것을 충족하기 위해 굉장히 노력합니다. 그래서, 자신의 육아 스타일에 대한 비판을 잘 받아들이지 않고 남의 소리에 귀를 기울이는데 어려움을 겪습니다.", "img": "INFJ.jpg"},
+            "INTJ": {"animal": "당신은 <strong>INTJ!! 과학적 부모</strong>", "explain": "좋은 점: 훌륭한 기획자이며 부모입니다. 자녀를 위한 목표와 자녀가 목표를 달성할 수 있는 확실한 방법을 가지고 있습니다. 아이들에게 훌륭한 동기부여자이자 리더이며, 아이들이 그 이상으로 나아가도록 밀어주고, 아이들이 할 수 없다고 말할 때에도 아이들이 할 수 있다고 생각하도록 영감을 줍니다.", "explain2": "나쁜 점: 대부분의 경우, 자녀들에게 너무 많은 것을 하기를 일찍부터 기대합니다. 모든 일이 발생하는 원인이 자연스럽게 일어나기 보다 자신의 의제에 따라 일어나도록 밀어 붙이고, 그렇게 되지 않을 경우 좌절할 수 있습니다.", "img": "INTJ.jpg"},
+            "ISTP": {"animal": "당신은 <strong>ISTP!! 핸즈프리 부모</strong>", "explain": "좋은 점: 자녀를 이해하는 데 매우 관심이 있습니다. 그들은 아이가 왜 무언가를 하고 있는지 알고 싶어하며, 아이가 아기일 때 해야 하는 각 이정표를 정해서 아기가 무엇을 해야 하는지 알 수 있습니다. 그들은 그 순간에 살고, 아이들과 함께 추억을 만들고, 아이들이 누구가 될지 걱정하지 않고 오히려 자신의 모습을 즐기며 시간을 보냅니다.", "explain2": "나쁜 점: 그들은 종종 자녀에게 가이드를 제시하지 않으며 자녀에게 가치관이나 규율을 심어 자신의 피부에 들어 오게 할 필요성을 느끼지 못합니다. 아이들과 함께 모험을 떠나는 것을 좋아하지만, 아이들이 나이가 들면 일상적인 일에 관해서는 일반적으로 손을 대지 않습니다.", "img": "ISTP.jpg"},
+            "ISFP": {"animal": "당신은 <strong>ISFP!! 예술적 부모</strong>", "explain": "좋은 점: 당신은 자녀가 태어날 때 자녀와 깊은 사랑에 빠지며 이 새로운 삶에서 아름다움과 완벽함만을 보게 됩니다. 순간을 즐길줄 알고 유연하며, 변화에 개방적입니다. 인생의 모든 계절을 아이들에게 헌신합니다. 마음이 따뜻하고 기부하며 자녀의 필요를 충족시키길 원합니다.", "explain2": "나쁜 점: 많은 일을 해야하고 계속 진행 중이기 때문에 시간에 쫓겨 당황할 수 있습니다. 그리고 대화뿐만아니라 내가 생각하고 있는 상황에서 자녀가 방해하거나 징징대거나 하면 어려움을 겪습니다.", "img": "ISFP.jpg"},
+            "INFP": {"animal": "당신은 <strong>INFP!! 이상주의자 부모</strong>", "explain": "좋은 점: 자녀에게 가치관을 심어주기 위해 노력합니다. 동정심이 많고 자녀의 안녕을 염려합니다. 매우 적응력이 뛰어나며 육아가 가져다주는 행복으로 살아갑니다. 자녀가 어린 시절에 겪는 행복, 슬픔, 어려움에 모두 반응하고 격려하며 자녀가 성장함에 따라 추억을 만드는 것을 즐깁니다.", "explain2": "나쁜 점: 가치에 대해 엄격해서 벌을 주어서라도 지켜야 한다고 생각합니다. 또한 가족과 관련하여 중요한 결정을 내리는 데 어려움을 겪으며 실수를 해서 자녀의 미래에 부정적인 영향을 미치기를 원하지 않습니다.", "img": "INFP.jpg"},
+            "INTP": {"animal": "당신은 <strong>INTP!! 생각하는 부모</strong>", "explain": "좋은 점: 이 부모들은 지식을 소중히 여기며, 자녀가 교육 및 고차원적인 과외 활동에서 탁월한 능력을 발휘하도록 합니다. 인기있는 것을 따르지 않고 오히려 불편하거나 정상을 넘어서더라도 가족에게 가장 적합한 것으로 결정하는 자신의 방식으로 자녀를 양육하는 경향이 있습니다.", "explain2": "나쁜 점: ", "img": "INTP.jpg"},
+            "ESTP": {"animal": "당신은 <strong>ESTP!! 신나는 부모</strong>", "explain": "좋은 점: 당신은 적응령이 있고 흐름에 따라 움직입니다. 이는 육아에 매우 중요합니다. 순간에 살기 때문에 자녀가 하는 모든 작은 일 또한 흡수하고 내일은 새로운 날이며 어제는 오늘 일어날 일을 반영하지 않는다는 것을 완전히 이해하고 있습니다.", "explain2": "나쁜 점: 부모로서 항상 이동 중이고 자발적이며 목표 지향적이기 때문에 아이들이 때때로 조급하게 행동할 수 있습니다. 그러므로써, 아이들이 좌절감을 느끼고 부모를 오해할 소지가 있습니다. 또한 아이들이 필요로 하는 규칙이나 구조를 제공하지 않기 때문에 아이들이 혼란스러워 할 수 있습니다.", "img": "ESTP.jpg"},
+            "ESFP": {"animal": "당신은 <strong>ESFP!! 재미를 사랑하는 부모</strong>", "explain": "좋은 점: 아이들을 위해 재미있고 마법같은 어린시절을 만들고 싶어 합니다. 그들은 새로운 경험을 좋아하고 자녀들도 즐길 수 있는 것을 보고 있습니다. 관찰력 또한 뛰어나며 주어진 순간에 자녀를 도울 수 있습니다.", "explain2": "나쁜 점: ESFP의 부모는 극도로 민감하고 또한 갈등을 싫어합니다. 자녀들과 갈등을 빚는 것은 그들을 갈라놓게 하고, 그들은 때때로 아이들에게 교훈을 주거나 그것을 극복하도록 돕는 대신에 아이들과 함께 부정적인 상황을 피하려고 합니다. 왜냐하면 그들은 전형적으로 계획하거나 집중하지 않는 삶을 추구하기 때문입니다. 그래서 아이들은 삶이 방치된 거 같은 느낌을 받기도 합니다.", "img": "ESFP.jpg"},
+            "ENFP": {"animal": "당신은 <strong>ENFP!! 영감을 주는 부모</strong>", "explain": "좋은 점: 자녀 없이는 인생을 상상할 수 없다고 언급할 가능성이 가장 높은 부모입니다. 매 순간을 포용하고 아이들과 그들이 가진 노력에 대해 흥분합니다. 아이들이 큰 꿈을 꾸고 상자 밖에서 생각하도록 격려합니다. 아이들과 잘 소통하고 어려움을 극복하는데 능숙합니다.", "explain2": "나쁜 점: 자녀를 위한 많은 아이디어를 가지고 있지만 아이들이 따라가는데 어려움을 겪고 스트레스를 받을 수 있습니다. 또한 사소한 문제를 굉장히 큰 문제처럼 만들 가능성이 높습니다.", "img": "ENFP.jpg"},
+            "ENTP": {"animal": "당신은 <strong>ENTP!! 혁신적인 부모</strong>", "explain": "좋은 점: 이 부모들은 스스로 생각하고 힘든 양육 문제에 대한 훌륭한 답을 가지고 있습니다. 가족과 함께 새로운 음식, 새로운 장소, 새로운 모험을 시도하게 되는 것을 기뻐합니다. 또한 아이들에게 상황에 대한 문제를 풀 수 있도록 문제 해결자로 성장할 수 있도록 도와줍니다.", "explain2": "나쁜 점: 이들은 아이들과의 협상을 거부합니다. 그리고 세상에서 가장 완벽한 엄마 아빠가 되길 원합니다. 아이들이 아이디어를 냈을 때 용납하지 않고, 비실용적이라고 일축하거나 그거는 약간 바뀌어야 될 거 같은데라는 충고식 조언을 합니다. 자녀가 스스로 무언가를 하거나 경험을 통해 배우도록 하는 대신 개입할 가능성이 가장 높은 부모입니다.", "img": "ENTP.jpg"},
+            "ESTJ": {"animal": "당신은 <strong>ESTJ!! 보호자 부모</strong>", "explain": "좋은 점: 평화로운 부모 일 가능성이 가장 높은 보호자 부모는 매우 실용적으로 생활합니다. 그들은 자녀가 하는 일의 동기를 보는 경향이 있으며 투시력이 있는 것처럼 행동합니다. 아이들을 위해 조직되고 열심히 일하며 미래를 위한 도움을 원합니다.", "explain2": "나쁜 점: 긴장을 푸는 것을 어려워합니다. 그들은 끊임없이 상황을 통제하고, 자녀를 보호하거나 책임자가 되려고 합니다. 그들은 우두머리 아이들을 잘 다루지 못하며 학교에서 헬리콥터 부모(아이에게 잔소리하고, 선생님에게 간섭하는 부모)가 될 가능성이 높습니다. 그래서 아이들이 어린 시절의 주요한 변화와 전환을 더 어렵게 만드는 융통성이 없는 경향을 띄고 있습니다.", "img": "ESTJ.jpg"},
+            "ESFJ": {"animal": "당신은 <strong>ESFJ!! 배려하는 부모</strong>", "explain": "좋은 점: 이 부모들은 매우 다정하고 마음이 따뜻합니다. 그들은 항상 그들 자신보다 아이들을 부양하고, 사랑스럽고, 상냥하고, 자상한 아이들을 키우려고 합니다. 가족과 함께 의미 있는 전통을 만드는 것 또한 좋아합니다. 그리고 가족과 아이들을 올바르게 기르는 것에 대해 강한 책임감을 가지고 있습니다.", "explain2": "나쁜 점: 그들의 결정은 대부분의 사람들이 동의하는 의사결정을 따릅니다. 사회적 지위에 대해 걱정하고, 때때로 그들의 아이들을 그들 자신의 중요성을 전달하기 위한 수단으로 사용합니다. 매우 전통적인 사람들이기 때문에 변화에 유연하지 않습니다. 아이들이 하는 행동에 대해 매우 당황해 할 수 있습니다.", "img": "ESFJ.jpg"},
+            "ENFJ": {"animal": "당신은 <strong>ENFJ!! 주는 부모</strong>", "explain": "좋은 점: 자녀의 감정을 특별히 염려하고 항상 자녀의 감정을 깊이 파고 듭니다. 자녀를 이해하려고 노력하고 자녀와 가족을 위해 좋은 일을 하려고 합니다. 또한 여러명의 자녀가 당신에게 요구를 한다면 그것을 하나의 요구사항으로 묶지않고 개별도 대응을 해주려고 노력합니다. 어린이의 입장에서 상황을 이해하려고 하는 능력 또한 뛰어납니다.", "explain2": "나쁜 점: 그들은 가족 모두의 개별적인 필요를 충족 시키려고 너무 많은 시간을 할애 할 수 있습니다. 또한 잘못된 결정을 내릴까 두려워 자녀를 위해 어려운 결정을 내리는 데 어려움을 겪습니다.", "img": "ENFJ.jpg"},
+            "ENTJ": {"animal": "당신은 <strong>ENTJ!! 구조화 된 부모</strong>", "explain": "좋은 점: 이 부모들은 단호하고 효율적입니다. 쉽게 집안을 운영하고 모든 것을 처리합니다. 그리고 아이들이 비판적인 사고를 가질 수 있도록 아이에게 도전합니다. 아이들이 다재다능하고 똑똑하길 원합니다.", "explain2": "나쁜 점: 기대치가 높기 때문에 엄격한 성향을 띌 가능성이 높습니다. 그래서 아이들이 자신이 충분히 완벽하지 못하거나 부모에게 결코 충분하지 않다고 느끼는 경우가 많습니다. 이러한 유형의 부모에게는 정서적 갈등을 해결하는게 어렵고 자녀의 감정을 쉽게 무시할 가능성이 높습니다.", "img": "ENTJ.jpg"}
+        }
+        /* 시작화면 */
+        function start() {
+            $(".start").hide();
+            $(".question").show();
+            next();
+        }
+        /* A 버튼 눌렀을 때 */
+        $("#A").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+1);
+            next();
+        });
+        /* B 버튼 눌렀을 때 */
+        $("#B").click(function(){
+            next();
+        });
+        function next() {
+            /* 마지막 문제일 때 */
+            if (num == 13) {
+                $(".question").hide();
+                $(".result").show();
+                
+                /* MBTI 구현하는 핵심 로직 */
+                /* 점수를 계산 */
+                var mbti = "";
+                ($("#EI").val() < 2) ? mbti+="I" : mbti+="E";
+                ($("#SN").val() < 2) ? mbti+="N" : mbti+="S";
+                ($("#TF").val() < 2) ? mbti+="F" : mbti+="T";
+                ($("#JP").val() < 2) ? mbti+="P" : mbti+="J";
+                $("#img").attr("src",result[mbti]["img"]);
+                $("#animal").html(result[mbti]["animal"]);
+                $("#explain").html(result[mbti]["explain"]);
+                $("#explain2").html(result[mbti]["explain2"]);
+            } 
+            /* 마지막 문제가 아닐 때 */
+            else {
+                $(".progress-bar").attr('style','width: calc(100/12*'+num+'%)');
+                $("#title").html(q[num]["title"]);
+                $("#type").val(q[num]["type"]);
+                $("#A").html(q[num]["A"]);
+                $("#B").html(q[num]["B"]);
+                num++;
+            }            
+        }
+    </script>
+<!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ffd42a25cb08056"></script>
+</body>
+</html>
