@@ -3,167 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://mbticontents.netlify.app/">
+    <link rel="canonical" href="https://mbtiexplain.netlify.app/">
     <title>MBTI별 속마음 번역기</title>
     <meta name="description" content="당신의 말, 진짜 속마음은 무엇일까요?">
     <meta property="og:type" content="website">
     <meta property="og:title" content="MBTI별 속마음 번역기">
     <meta property="og:description" content="같은 말도 MBTI에 따라 다른 의미! 당신의 진짜 속마음을 확인하세요">
-    <meta property="og:image" content="http://mbticontents.netlify.app/banner.png">
-    <meta property="og:url" content="http://mbticontents.netlify.app/">
+    <meta property="og:image" content="https://mbtiexplain.netlify.app/banner.png">
+    <meta property="og:url" content="https://mbtiexplain.netlify.app/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="container">
     <!-- 시작화면 -->
     <article class="start">
-        <img src="banner.png" alt="MBTI Banner" class="banner-img mt-3">
-        <h1 class="mt-4 text-center">MBTI별 속마음 번역기</h1>
+        <h1 class="mt-5 text-center">MBTI별 속마음 번역기</h1>
         <p class="text-center mt-3 subtitle">"나는 괜찮아" 한 마디에 숨은 16가지 의미</p>
         <p class="text-center description">같은 말도 MBTI에 따라 전혀 다른 뜻!<br>당신의 진짜 속마음을 확인해보세요</p>
-        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showMBTISelector();'>시작하기</button>
-    </article>
-
-    <!-- MBTI 선택 화면 -->
-    <article class="mbti-selector">
-        <h2 class="mt-5 text-center">당신의 MBTI를 선택하세요</h2>
-        <p class="text-center mt-3 text-muted">모르시면 <a href="https://www.16personalities.com/ko" target="_blank">여기서 테스트</a></p>
-
-        <div class="mbti-grid mt-4">
-            <button class="mbti-btn" onclick="selectMBTI('ISTJ')">
-                <img src="ISTJ.jpg" alt="ISTJ">
-                <span>ISTJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ISFJ')">
-                <img src="ISFJ.jpg" alt="ISFJ">
-                <span>ISFJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('INFJ')">
-                <img src="INFJ.jpg" alt="INFJ">
-                <span>INFJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('INTJ')">
-                <img src="INTJ.jpg" alt="INTJ">
-                <span>INTJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ISTP')">
-                <img src="ISTP.jpg" alt="ISTP">
-                <span>ISTP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ISFP')">
-                <img src="ISFP.jpg" alt="ISFP">
-                <span>ISFP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('INFP')">
-                <img src="INFP.jpg" alt="INFP">
-                <span>INFP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('INTP')">
-                <img src="INTP.jpg" alt="INTP">
-                <span>INTP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ESTP')">
-                <img src="ESTP.jpg" alt="ESTP">
-                <span>ESTP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ESFP')">
-                <img src="ESFP.jpg" alt="ESFP">
-                <span>ESFP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ENFP')">
-                <img src="ENFP.jpg" alt="ENFP">
-                <span>ENFP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ENTP')">
-                <img src="ENTP.jpg" alt="ENTP">
-                <span>ENTP</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ESTJ')">
-                <img src="ESTJ.jpg" alt="ESTJ">
-                <span>ESTJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ESFJ')">
-                <img src="ESFJ.jpg" alt="ESFJ">
-                <span>ESFJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ENFJ')">
-                <img src="ENFJ.jpg" alt="ENFJ">
-                <span>ENFJ</span>
-            </button>
-            <button class="mbti-btn" onclick="selectMBTI('ENTJ')">
-                <img src="ENTJ.jpg" alt="ENTJ">
-                <span>ENTJ</span>
-            </button>
-        </div>
+        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showPhraseSelector();'>시작하기</button>
     </article>
 
     <!-- 문구 선택 화면 -->
     <article class="phrase-selector">
         <h2 class="mt-5 text-center">자주 하는 말을 선택하세요</h2>
-        <p class="text-center mt-3 text-muted">선택한 MBTI: <strong id="selected-mbti"></strong></p>
+        <p class="text-center mt-3 text-muted">하나만 선택해주세요</p>
 
         <div class="phrase-list mt-4">
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase1" value="나는 괜찮아">
+            <div class="phrase-item" onclick="selectPhrase('나는 괜찮아')">
+                <input type="radio" name="phrase" id="phrase1" value="나는 괜찮아">
                 <label for="phrase1">"나는 괜찮아"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase2" value="별로 안 바빠">
+            <div class="phrase-item" onclick="selectPhrase('별로 안 바빠')">
+                <input type="radio" name="phrase" id="phrase2" value="별로 안 바빠">
                 <label for="phrase2">"별로 안 바빠"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase3" value="나중에 연락할게">
+            <div class="phrase-item" onclick="selectPhrase('나중에 연락할게')">
+                <input type="radio" name="phrase" id="phrase3" value="나중에 연락할게">
                 <label for="phrase3">"나중에 연락할게"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase4" value="아무거나 좋아">
+            <div class="phrase-item" onclick="selectPhrase('아무거나 좋아')">
+                <input type="radio" name="phrase" id="phrase4" value="아무거나 좋아">
                 <label for="phrase4">"아무거나 좋아"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase5" value="생각해볼게">
+            <div class="phrase-item" onclick="selectPhrase('생각해볼게')">
+                <input type="radio" name="phrase" id="phrase5" value="생각해볼게">
                 <label for="phrase5">"생각해볼게"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase6" value="괜찮은데?">
+            <div class="phrase-item" onclick="selectPhrase('괜찮은데?')">
+                <input type="radio" name="phrase" id="phrase6" value="괜찮은데?">
                 <label for="phrase6">"괜찮은데?"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase7" value="관심 없어">
+            <div class="phrase-item" onclick="selectPhrase('관심 없어')">
+                <input type="radio" name="phrase" id="phrase7" value="관심 없어">
                 <label for="phrase7">"관심 없어"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase8" value="다 괜찮아">
+            <div class="phrase-item" onclick="selectPhrase('다 괜찮아')">
+                <input type="radio" name="phrase" id="phrase8" value="다 괜찮아">
                 <label for="phrase8">"다 괜찮아"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase9" value="피곤해">
+            <div class="phrase-item" onclick="selectPhrase('피곤해')">
+                <input type="radio" name="phrase" id="phrase9" value="피곤해">
                 <label for="phrase9">"피곤해"</label>
             </div>
-            <div class="phrase-item">
-                <input type="checkbox" id="phrase10" value="재미있겠다">
+            <div class="phrase-item" onclick="selectPhrase('재미있겠다')">
+                <input type="radio" name="phrase" id="phrase10" value="재미있겠다">
                 <label for="phrase10">"재미있겠다"</label>
             </div>
         </div>
 
         <p class="text-center mt-3 text-danger" id="selection-warning" style="display: none;">
-            최소 1개, 최대 5개까지 선택할 수 있습니다
+            문구를 선택해주세요
         </p>
 
-        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showResults();'>속마음 확인하기</button>
-        <button type="button" class="btn btn-secondary mt-2" onclick='goBackToMBTI();'>MBTI 다시 선택</button>
+        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showResults();'>16가지 속마음 확인하기</button>
+        <button type="button" class="btn btn-secondary mt-2" onclick='restart();'>처음으로</button>
     </article>
 
     <!-- 결과화면 -->
     <article class="result">
         <h2 class="mt-5 text-center">
-            <img id="result-img" src="" alt="MBTI" class="result-mbti-img">
-            <span id="result-mbti"></span>의 속마음
+            "<span id="selected-phrase"></span>"의 MBTI별 속마음
         </h2>
+        <p class="text-center text-muted mb-4">같은 말, 16가지 다른 의미</p>
 
         <div id="results-container" class="mt-4"></div>
 
         <div class="mt-5 text-center">
-            <button type="button" class="btn btn-primary" onclick='restart();'>다시 하기</button>
+            <button type="button" class="btn btn-primary" onclick='restart();'>다른 문구 보기</button>
             <button type="button" class="btn btn-success" onclick='shareKakao();'>카카오톡 공유</button>
         </div>
 
@@ -184,8 +110,10 @@
 
     <script>
         // 전역 변수
-        let selectedMBTI = '';
-        let selectedPhrases = [];
+        let selectedPhraseText = '';
+
+        // MBTI 목록
+        const mbtiTypes = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];
 
         // MBTI별 문구 해석 데이터베이스
         const translations = {
@@ -371,51 +299,37 @@
             }
         };
 
-        function showMBTISelector() {
+        function showPhraseSelector() {
             $(".start").hide();
-            $(".mbti-selector").show();
-        }
-
-        function selectMBTI(mbti) {
-            selectedMBTI = mbti;
-            $("#selected-mbti").text(mbti);
-            $(".mbti-selector").hide();
             $(".phrase-selector").show();
-            // 체크박스 초기화
-            $("input[type='checkbox']").prop('checked', false);
-            $("#selection-warning").hide();
         }
 
-        function goBackToMBTI() {
-            $(".phrase-selector").hide();
-            $(".mbti-selector").show();
+        function selectPhrase(phrase) {
+            selectedPhraseText = phrase;
+            // 라디오 버튼 체크
+            $("input[value='" + phrase + "']").prop('checked', true);
         }
 
         function showResults() {
-            // 선택된 문구 가져오기
-            selectedPhrases = [];
-            $("input[type='checkbox']:checked").each(function() {
-                selectedPhrases.push($(this).val());
-            });
-
-            // 유효성 검사
-            if (selectedPhrases.length < 1 || selectedPhrases.length > 5) {
+            // 선택된 문구 확인
+            if (!selectedPhraseText) {
                 $("#selection-warning").show();
                 return;
             }
 
             // 결과 표시
-            $("#result-mbti").text(selectedMBTI);
-            $("#result-img").attr("src", selectedMBTI + ".jpg");
+            $("#selected-phrase").text(selectedPhraseText);
 
             let resultsHTML = '';
-            selectedPhrases.forEach(phrase => {
-                const meaning = translations[phrase][selectedMBTI];
+            mbtiTypes.forEach(mbti => {
+                const meaning = translations[selectedPhraseText][mbti];
                 resultsHTML += `
-                    <div class="result-card">
-                        <div class="result-phrase">"${phrase}"</div>
-                        <div class="result-arrow">↓</div>
-                        <div class="result-meaning">${meaning}</div>
+                    <div class="mbti-result-card">
+                        <div class="mbti-header">
+                            <img src="${mbti}.jpg" alt="${mbti}" class="mbti-icon">
+                            <span class="mbti-type">${mbti}</span>
+                        </div>
+                        <div class="mbti-meaning">${meaning}</div>
                     </div>
                 `;
             });
@@ -427,9 +341,11 @@
         }
 
         function restart() {
-            selectedMBTI = '';
-            selectedPhrases = [];
+            selectedPhraseText = '';
+            $("input[type='radio']").prop('checked', false);
+            $("#selection-warning").hide();
             $(".result").hide();
+            $(".phrase-selector").hide();
             $(".start").show();
         }
 
