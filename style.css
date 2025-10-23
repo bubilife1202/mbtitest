@@ -21,6 +21,8 @@ body {
 }
 
 /* 화면 표시/숨김 */
+.relationship-selector,
+.gender-selector,
 .mbti-selector,
 .phrase-selector,
 .result {
@@ -34,69 +36,149 @@ body {
 
 .warning-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     color: white;
     padding: 10px 25px;
     border-radius: 25px;
     font-weight: 700;
     font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-    animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-.shock-text {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ff6b6b;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-.preview-box {
+.example-box {
     background: #f8f9fa;
     border-radius: 15px;
-    padding: 20px;
-    max-width: 400px;
+    padding: 25px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
-.preview-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 10px;
+.example-quote {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.example-grid {
+    display: grid;
+    gap: 10px;
+}
+
+.example-item {
     background: white;
-    border-radius: 10px;
+    border: 2px solid #28a745;
+    border-radius: 12px;
+    padding: 15px;
 }
 
-.mbti-tag {
-    background: #667eea;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.9rem;
+.example-item.danger {
+    border-color: #dc3545;
 }
 
-.truth {
-    color: #28a745;
+.example-label {
     font-weight: 600;
+    color: #667eea;
+    margin-bottom: 5px;
 }
 
-.lie {
-    color: #ff6b6b;
-    font-weight: 600;
+.example-text {
+    font-size: 1.1rem;
+    color: #333;
 }
 
 .description {
     color: #666;
     font-size: 1rem;
     line-height: 1.6;
+}
+
+/* 관계 선택 */
+.relationship-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .relationship-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.relationship-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 3px solid #dee2e6;
+    border-radius: 20px;
+    padding: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.relationship-card:hover {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-color: #667eea;
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.relationship-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.relationship-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* 성별 선택 */
+.gender-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .gender-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gender-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 3px solid #dee2e6;
+    border-radius: 20px;
+    padding: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.gender-card:hover {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-color: #667eea;
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.gender-icon {
+    font-size: 5rem;
+    margin-bottom: 15px;
+}
+
+.gender-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
 }
 
 /* MBTI 선택 그리드 */
@@ -155,7 +237,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* 문구 선택 - 데이팅 카드 */
+/* 문구 선택 */
 .phrase-list-dating {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -200,151 +282,92 @@ body {
 }
 
 /* 결과 화면 */
+.result-header {
+    text-align: center;
+}
+
 .result-title {
     font-size: 2rem;
     font-weight: 700;
-    color: #ff6b6b;
+    color: #667eea;
 }
 
-.result-step {
+.result-info {
+    font-size: 1.1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.result-section {
     background: #f8f9fa;
     border-radius: 15px;
     padding: 25px;
 }
 
-.step-title {
-    font-size: 1.3rem;
+.section-title {
+    font-size: 1.4rem;
     font-weight: 700;
     color: #333;
     margin-bottom: 15px;
 }
 
-.step-number {
-    display: inline-block;
-    background: #667eea;
-    color: white;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+.meaning-card {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 2px solid #2196f3;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0d47a1;
     text-align: center;
-    border-radius: 50%;
-    margin-right: 10px;
-    font-size: 1rem;
 }
 
-.truth-card {
+.solution-card {
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.do-card {
     background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
     border: 2px solid #28a745;
-    border-radius: 15px;
-    padding: 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
+}
+
+.dont-card {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 2px solid #dc3545;
+}
+
+.solution-header {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.do-card .solution-header {
     color: #155724;
-    text-align: center;
 }
 
-.partner-mbti-selector {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.partner-card {
-    background: linear-gradient(135deg, #fff3cd 0%, #ffe5a1 100%);
-    border: 3px solid #ff6b6b;
-    border-radius: 15px;
-    padding: 25px;
-    text-align: center;
-    animation: shake 0.5s ease-in-out, fadeIn 0.5s ease-out;
-    position: relative;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
-
-.shock-badge {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff6b6b;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.4);
-}
-
-.partner-card h4 {
-    margin-top: 15px;
-    color: #ff6b6b;
-    font-weight: 700;
-}
-
-.partner-card div {
-    font-size: 1.1rem;
-    font-weight: 600;
+.dont-card .solution-header {
     color: #721c24;
-    margin-top: 10px;
 }
 
-/* 모든 MBTI 그리드 */
-.all-mbti-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+.solution-card ul {
+    margin: 0;
+    padding-left: 25px;
 }
 
-@media (max-width: 768px) {
-    .all-mbti-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.mini-mbti-card {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 15px;
-    transition: all 0.3s ease;
-}
-
-.mini-mbti-card:hover {
-    border-color: #667eea;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-}
-
-.mini-mbti-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.mini-mbti-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    border: 2px solid #667eea;
-}
-
-.mini-mbti-type {
+.solution-card li {
     font-size: 1rem;
-    font-weight: 700;
-    color: #667eea;
+    line-height: 1.8;
+    margin-bottom: 8px;
 }
 
-.mini-mbti-meaning {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    color: #333;
+.do-card li {
+    color: #155724;
+}
+
+.dont-card li {
+    color: #721c24;
 }
 
 /* 버튼 스타일 */
@@ -357,14 +380,14 @@ body {
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .btn-danger:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .btn-primary {
@@ -395,26 +418,6 @@ body {
 .btn-success:hover {
     background: #218838;
     transform: translateY(-2px);
-}
-
-.btn-outline-primary {
-    border: 2px solid #667eea;
-    color: #667eea;
-}
-
-.btn-outline-primary:hover {
-    background: #667eea;
-    color: white;
-}
-
-.btn-outline-secondary {
-    border: 2px solid #6c757d;
-    color: #6c757d;
-}
-
-.btn-outline-secondary:hover {
-    background: #6c757d;
-    color: white;
 }
 
 .action-buttons {
@@ -467,8 +470,18 @@ body {
         padding: 20px;
     }
 
-    .shock-text {
+    .example-quote {
         font-size: 1.5rem;
+    }
+
+    .relationship-icon,
+    .gender-icon {
+        font-size: 3rem;
+    }
+
+    .relationship-text,
+    .gender-text {
+        font-size: 1.1rem;
     }
 
     .phrase-emoji {
@@ -481,6 +494,10 @@ body {
 
     .result-title {
         font-size: 1.5rem;
+    }
+
+    .meaning-card {
+        font-size: 1rem;
     }
 
     .action-buttons .btn {
