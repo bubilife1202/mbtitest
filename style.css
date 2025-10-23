@@ -36,13 +36,23 @@ body {
 
 .warning-badge {
     display: inline-block;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
     color: white;
-    padding: 10px 25px;
+    padding: 12px 30px;
     border-radius: 25px;
     font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 .example-box {
@@ -83,8 +93,15 @@ body {
 }
 
 .example-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: #333;
+}
+
+.example-subtext {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 5px;
 }
 
 .description {
@@ -135,6 +152,59 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     color: #333;
+}
+
+/* 관계 선택 V2 (Combined relationship+gender) */
+.relationship-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .relationship-grid-v2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .relationship-grid-v2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.relationship-card-v2 {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border: 3px solid #dee2e6;
+    border-radius: 15px;
+    padding: 25px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.relationship-card-v2:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+.relationship-card-v2:hover .relationship-text {
+    color: white;
+}
+
+.relationship-card-v2:active {
+    transform: translateY(-2px);
 }
 
 /* 성별 선택 */
@@ -368,6 +438,12 @@ body {
 
 .dont-card li {
     color: #721c24;
+}
+
+/* Badge styles */
+.badge-lg {
+    font-size: 1.1rem;
+    padding: 10px 20px;
 }
 
 /* 버튼 스타일 */

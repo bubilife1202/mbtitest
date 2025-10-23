@@ -17,75 +17,87 @@
 <body class="container">
     <!-- 시작화면 -->
     <article class="start">
-        <div class="warning-badge">💡 MBTI 대처법</div>
-        <h1 class="mt-4 text-center">상대방의 말<br>진짜 의미는?</h1>
+        <div class="warning-badge">🚨 관계 위기 주의보</div>
+        <h1 class="mt-4 text-center mb-4">당신의 여자친구가<br>"괜찮아"라고 할 때</h1>
         <div class="example-box mt-4">
-            <p class="example-quote">"괜찮아"</p>
             <div class="example-grid">
                 <div class="example-item">
-                    <div class="example-label">남자 ISTJ</div>
-                    <div class="example-text">→ 정말 괜찮음</div>
+                    <div class="example-label">ISTJ 여자친구</div>
+                    <div class="example-text">✅ 정말 괜찮음</div>
+                    <div class="example-subtext">→ 그대로 믿어도 OK</div>
                 </div>
                 <div class="example-item danger">
-                    <div class="example-label">여자 INFP</div>
-                    <div class="example-text">→ 전혀 안 괜찮음!</div>
+                    <div class="example-label">INFP 여자친구</div>
+                    <div class="example-text">💥 엄청 화남!!</div>
+                    <div class="example-subtext">→ 위로 필요!</div>
                 </div>
             </div>
         </div>
         <p class="text-center mt-4 description">
-            <strong>성별 × MBTI에 따라 완전히 다른 의미!</strong><br>
-            올바른 대처법을 알려드립니다
+            <strong>대처법을 모르면 관계가 끝납니다</strong><br>
+            성별 × MBTI별 진짜 의미와 올바른 대처법
         </p>
-        <button type="button" class="btn btn-danger btn-lg mt-4" onclick='showRelationship();'>시작하기</button>
+        <button type="button" class="btn btn-danger btn-lg mt-4" onclick='showRelationship();'>지금 바로 확인하기</button>
     </article>
 
     <!-- 관계 선택 -->
     <article class="relationship-selector">
-        <h2 class="mt-5 text-center">누구를 이해하고 싶나요?</h2>
-        <div class="relationship-grid mt-4">
-            <div class="relationship-card" onclick="selectRelationship('연인')">
+        <h2 class="mt-5 text-center mb-3">누구를 이해하고 싶나요?</h2>
+        <p class="text-center text-muted mb-4">한 번만 클릭하면 됩니다</p>
+        <div class="relationship-grid-v2 mt-4">
+            <div class="relationship-card-v2" onclick="selectPerson('여자친구', '여자', '연인')">
                 <div class="relationship-icon">💑</div>
-                <div class="relationship-text">연인</div>
+                <div class="relationship-text">내 여자친구</div>
             </div>
-            <div class="relationship-card" onclick="selectRelationship('친구')">
-                <div class="relationship-icon">👥</div>
-                <div class="relationship-text">친구</div>
+            <div class="relationship-card-v2" onclick="selectPerson('남자친구', '남자', '연인')">
+                <div class="relationship-icon">💑</div>
+                <div class="relationship-text">내 남자친구</div>
             </div>
-            <div class="relationship-card" onclick="selectRelationship('가족')">
+            <div class="relationship-card-v2" onclick="selectPerson('와이프', '여자', '연인')">
+                <div class="relationship-icon">💍</div>
+                <div class="relationship-text">내 와이프</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('남편', '남자', '연인')">
+                <div class="relationship-icon">💍</div>
+                <div class="relationship-text">내 남편</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('여자 상사', '여자', '동료')">
+                <div class="relationship-icon">👔</div>
+                <div class="relationship-text">여자 상사</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('남자 상사', '남자', '동료')">
+                <div class="relationship-icon">👔</div>
+                <div class="relationship-text">남자 상사</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('여자 동료', '여자', '동료')">
+                <div class="relationship-icon">💼</div>
+                <div class="relationship-text">여자 동료</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('남자 동료', '남자', '동료')">
+                <div class="relationship-icon">💼</div>
+                <div class="relationship-text">남자 동료</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('여자 친구', '여자', '친구')">
+                <div class="relationship-icon">👭</div>
+                <div class="relationship-text">여자 친구</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('남자 친구', '남자', '친구')">
+                <div class="relationship-icon">👬</div>
+                <div class="relationship-text">남자 친구</div>
+            </div>
+            <div class="relationship-card-v2" onclick="selectPerson('가족', '남자', '가족')">
                 <div class="relationship-icon">👨‍👩‍👧‍👦</div>
                 <div class="relationship-text">가족</div>
             </div>
-            <div class="relationship-card" onclick="selectRelationship('동료')">
-                <div class="relationship-icon">💼</div>
-                <div class="relationship-text">동료</div>
-            </div>
         </div>
     </article>
 
-    <!-- 성별 선택 -->
-    <article class="gender-selector">
-        <h2 class="mt-5 text-center">상대방의 성별은?</h2>
-        <p class="text-center mt-3">
-            <span class="badge badge-info">관계: <span id="selected-relationship"></span></span>
-        </p>
-        <div class="gender-grid mt-4">
-            <div class="gender-card" onclick="selectGender('남자')">
-                <div class="gender-icon">👨</div>
-                <div class="gender-text">남자</div>
-            </div>
-            <div class="gender-card" onclick="selectGender('여자')">
-                <div class="gender-icon">👩</div>
-                <div class="gender-text">여자</div>
-            </div>
-        </div>
-        <button type="button" class="btn btn-secondary mt-4" onclick='goBackToRelationship();'>관계 다시 선택</button>
-    </article>
 
     <!-- MBTI 선택 -->
     <article class="mbti-selector">
-        <h2 class="mt-5 text-center">상대방의 MBTI는?</h2>
+        <h2 class="mt-5 text-center">MBTI를 선택하세요</h2>
         <p class="text-center mt-3">
-            <span class="badge badge-info"><span id="selected-gender"></span> <span id="selected-relationship-2"></span></span>
+            <span class="badge badge-info badge-lg"><span id="selected-person"></span></span>
         </p>
         <p class="text-center text-muted">모르시면 <a href="https://www.16personalities.com/ko" target="_blank">여기서 테스트</a></p>
 
@@ -155,15 +167,15 @@
                 <span>ENTJ</span>
             </button>
         </div>
-        <button type="button" class="btn btn-secondary mt-4" onclick='goBackToGender();'>성별 다시 선택</button>
+        <button type="button" class="btn btn-secondary mt-4" onclick='goBackToRelationship();'>다시 선택</button>
     </article>
 
     <!-- 문구 선택 -->
     <article class="phrase-selector">
-        <h2 class="mt-5 text-center">상대방이 자주 하는 말은?</h2>
+        <h2 class="mt-5 text-center">뭐라고 했나요?</h2>
         <p class="text-center mt-3">
-            <span class="badge badge-info">
-                <span id="selected-gender-2"></span> <span id="selected-relationship-3"></span>
+            <span class="badge badge-info badge-lg">
+                <span id="selected-person-2"></span>
                 (<span id="selected-mbti"></span>)
             </span>
         </p>
@@ -211,7 +223,7 @@
         <div class="result-header mt-4">
             <h2 class="result-title">"<span id="result-phrase"></span>"</h2>
             <p class="result-info">
-                <span id="result-gender"></span> <span id="result-relationship"></span>
+                <span id="result-person"></span>
                 (<span id="result-mbti"></span>)
             </p>
         </div>
@@ -255,7 +267,7 @@
 
     <!-- Version Info -->
     <div class="version-info text-center mt-3">
-        <small class="text-muted">v1.0.0 | 상대방 이해하기 버전</small>
+        <small class="text-muted">v1.1.0 | 쉬운 UI 버전</small>
     </div>
 
     <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
@@ -264,41 +276,34 @@
 
     <script src="data.js"></script>
     <script>
-        let relationship = '';
-        let gender = '';
+        let personLabel = '';  // 표시할 레이블 (예: "내 여자친구")
+        let gender = '';       // 내부 처리용 성별
+        let relationship = ''; // 내부 처리용 관계
         let mbti = '';
         let phrase = '';
 
         function showRelationship() {
             $(".start").hide();
             $(".relationship-selector").show();
+            window.scrollTo(0, 0);
         }
 
-        function selectRelationship(rel) {
+        function selectPerson(label, g, rel) {
+            personLabel = label;
+            gender = g;
             relationship = rel;
-            $("#selected-relationship").text(rel);
-            $("#selected-relationship-2").text(rel);
-            $("#selected-relationship-3").text(rel);
+            $("#selected-person").text(label);
+            $("#selected-person-2").text(label);
             $(".relationship-selector").hide();
-            $(".gender-selector").show();
+            $(".mbti-selector").show();
+            window.scrollTo(0, 0);
         }
 
         function goBackToRelationship() {
-            $(".gender-selector").hide();
-            $(".relationship-selector").show();
-        }
-
-        function selectGender(g) {
-            gender = g;
-            $("#selected-gender").text(g);
-            $("#selected-gender-2").text(g);
-            $(".gender-selector").hide();
-            $(".mbti-selector").show();
-        }
-
-        function goBackToGender() {
             $(".mbti-selector").hide();
-            $(".gender-selector").show();
+            $(".phrase-selector").hide();
+            $(".relationship-selector").show();
+            window.scrollTo(0, 0);
         }
 
         function selectMBTI(m) {
@@ -306,11 +311,13 @@
             $("#selected-mbti").text(m);
             $(".mbti-selector").hide();
             $(".phrase-selector").show();
+            window.scrollTo(0, 0);
         }
 
         function goBackToMBTI() {
             $(".phrase-selector").hide();
             $(".mbti-selector").show();
+            window.scrollTo(0, 0);
         }
 
         function selectPhrase(p) {
@@ -321,8 +328,7 @@
         function showResults() {
             // 결과 표시
             $("#result-phrase").text(phrase);
-            $("#result-gender").text(gender);
-            $("#result-relationship").text(relationship);
+            $("#result-person").text(personLabel);
             $("#result-mbti").text(mbti);
 
             const data = phraseData[phrase][gender][mbti];
@@ -349,6 +355,7 @@
         }
 
         function restart() {
+            personLabel = '';
             relationship = '';
             gender = '';
             mbti = '';
@@ -359,7 +366,7 @@
         }
 
         function shareResult() {
-            const text = `${gender} ${relationship}(${mbti})가 "${phrase}"라고 할 때 진짜 의미!\n\n💡 ${phraseData[phrase][gender][mbti].meaning}\n\n당신도 확인해보세요!\nhttps://mbtiexplain.netlify.app`;
+            const text = `${personLabel}(${mbti})가 "${phrase}"라고 할 때 진짜 의미!\n\n💡 ${phraseData[phrase][gender][mbti].meaning}\n\n당신도 확인해보세요!\nhttps://mbtiexplain.netlify.app`;
 
             if (navigator.share) {
                 navigator.share({
