@@ -444,6 +444,16 @@ body {
     margin: 20px auto;
 }
 
+/* 버전 정보 */
+.version-info {
+    padding: 10px;
+    opacity: 0.6;
+}
+
+.version-info small {
+    font-size: 0.85rem;
+}
+
 /* 애니메이션 */
 @keyframes fadeIn {
     from {
