@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://mbtiexplain.netlify.app/">
-    <title>MBTI별 속마음 번역기</title>
-    <meta name="description" content="당신의 말, 진짜 속마음은 무엇일까요?">
+    <title>MBTI별 연애할 때 위험한 말</title>
+    <meta name="description" content="당신의 그 말, 상대방은 이렇게 들었습니다">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="MBTI별 속마음 번역기">
-    <meta property="og:description" content="같은 말도 MBTI에 따라 다른 의미! 당신의 진짜 속마음을 확인하세요">
+    <meta property="og:title" content="MBTI별 연애할 때 위험한 말">
+    <meta property="og:description" content="나는 진심이었는데, 상대는 이렇게 오해했다?! MBTI별 위험한 말 번역기">
     <meta property="og:image" content="https://mbtiexplain.netlify.app/banner.png">
     <meta property="og:url" content="https://mbtiexplain.netlify.app/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -17,83 +17,223 @@
 <body class="container">
     <!-- 시작화면 -->
     <article class="start">
-        <h1 class="mt-5 text-center">MBTI별 속마음 번역기</h1>
-        <p class="text-center mt-3 subtitle">"나는 괜찮아" 한 마디에 숨은 16가지 의미</p>
-        <p class="text-center description">같은 말도 MBTI에 따라 전혀 다른 뜻!<br>당신의 진짜 속마음을 확인해보세요</p>
-        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showPhraseSelector();'>시작하기</button>
+        <div class="warning-badge">⚠️ 연애 주의보 ⚠️</div>
+        <h1 class="mt-4 text-center">MBTI별<br>연애할 때 위험한 말</h1>
+        <p class="text-center mt-3 shock-text">"나 화 안 났어"</p>
+        <div class="preview-box mt-3">
+            <div class="preview-item">
+                <span class="mbti-tag">ISTJ</span>
+                <span class="truth">진심: 정말 안 화남</span>
+            </div>
+            <div class="preview-item">
+                <span class="mbti-tag">INFP</span>
+                <span class="lie">들리는 소리: 엄청 화남</span>
+            </div>
+        </div>
+        <p class="text-center mt-4 description">
+            같은 말, 16가지 다른 의미<br>
+            <strong>당신의 진심이 상대에게는 오해로 들릴 수 있습니다</strong>
+        </p>
+        <button type="button" class="btn btn-danger btn-lg mt-4" onclick='showMBTISelector();'>
+            내 말은 어떻게 들릴까? 확인하기
+        </button>
+    </article>
+
+    <!-- MBTI 선택 화면 -->
+    <article class="mbti-selector">
+        <h2 class="mt-5 text-center">당신의 MBTI를 선택하세요</h2>
+        <p class="text-center mt-3 text-muted">모르시면 <a href="https://www.16personalities.com/ko" target="_blank">여기서 테스트</a></p>
+
+        <div class="mbti-grid mt-4">
+            <button class="mbti-btn" onclick="selectMBTI('ISTJ')">
+                <img src="ISTJ.jpg" alt="ISTJ">
+                <span>ISTJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ISFJ')">
+                <img src="ISFJ.jpg" alt="ISFJ">
+                <span>ISFJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('INFJ')">
+                <img src="INFJ.jpg" alt="INFJ">
+                <span>INFJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('INTJ')">
+                <img src="INTJ.jpg" alt="INTJ">
+                <span>INTJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ISTP')">
+                <img src="ISTP.jpg" alt="ISTP">
+                <span>ISTP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ISFP')">
+                <img src="ISFP.jpg" alt="ISFP">
+                <span>ISFP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('INFP')">
+                <img src="INFP.jpg" alt="INFP">
+                <span>INFP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('INTP')">
+                <img src="INTP.jpg" alt="INTP">
+                <span>INTP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ESTP')">
+                <img src="ESTP.jpg" alt="ESTP">
+                <span>ESTP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ESFP')">
+                <img src="ESFP.jpg" alt="ESFP">
+                <span>ESFP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ENFP')">
+                <img src="ENFP.jpg" alt="ENFP">
+                <span>ENFP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ENTP')">
+                <img src="ENTP.jpg" alt="ENTP">
+                <span>ENTP</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ESTJ')">
+                <img src="ESTJ.jpg" alt="ESTJ">
+                <span>ESTJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ESFJ')">
+                <img src="ESFJ.jpg" alt="ESFJ">
+                <span>ESFJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ENFJ')">
+                <img src="ENFJ.jpg" alt="ENFJ">
+                <span>ENFJ</span>
+            </button>
+            <button class="mbti-btn" onclick="selectMBTI('ENTJ')">
+                <img src="ENTJ.jpg" alt="ENTJ">
+                <span>ENTJ</span>
+            </button>
+        </div>
     </article>
 
     <!-- 문구 선택 화면 -->
     <article class="phrase-selector">
-        <h2 class="mt-5 text-center">자주 하는 말을 선택하세요</h2>
-        <p class="text-center mt-3 text-muted">하나만 선택해주세요</p>
+        <h2 class="mt-5 text-center">연애할 때 자주 하는 말은?</h2>
+        <p class="text-center mt-3">
+            <span class="badge badge-primary">당신의 MBTI: <span id="selected-mbti-display"></span></span>
+        </p>
 
-        <div class="phrase-list mt-4">
-            <div class="phrase-item" onclick="selectPhrase('나는 괜찮아')">
-                <input type="radio" name="phrase" id="phrase1" value="나는 괜찮아">
-                <label for="phrase1">"나는 괜찮아"</label>
+        <div class="phrase-list-dating mt-4">
+            <div class="phrase-card" onclick="selectPhrase('나 화 안 났어')">
+                <div class="phrase-emoji">💢</div>
+                <div class="phrase-text">"나 화 안 났어"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('별로 안 바빠')">
-                <input type="radio" name="phrase" id="phrase2" value="별로 안 바빠">
-                <label for="phrase2">"별로 안 바빠"</label>
+            <div class="phrase-card" onclick="selectPhrase('네 맘대로 해')">
+                <div class="phrase-emoji">😤</div>
+                <div class="phrase-text">"네 맘대로 해"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('나중에 연락할게')">
-                <input type="radio" name="phrase" id="phrase3" value="나중에 연락할게">
-                <label for="phrase3">"나중에 연락할게"</label>
+            <div class="phrase-card" onclick="selectPhrase('아무거나 좋아')">
+                <div class="phrase-emoji">🤷</div>
+                <div class="phrase-text">"아무거나 좋아"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('아무거나 좋아')">
-                <input type="radio" name="phrase" id="phrase4" value="아무거나 좋아">
-                <label for="phrase4">"아무거나 좋아"</label>
+            <div class="phrase-card" onclick="selectPhrase('별로 안 바빠')">
+                <div class="phrase-emoji">⏰</div>
+                <div class="phrase-text">"별로 안 바빠"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('생각해볼게')">
-                <input type="radio" name="phrase" id="phrase5" value="생각해볼게">
-                <label for="phrase5">"생각해볼게"</label>
+            <div class="phrase-card" onclick="selectPhrase('나중에 얘기하자')">
+                <div class="phrase-emoji">🚫</div>
+                <div class="phrase-text">"나중에 얘기하자"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('괜찮은데?')">
-                <input type="radio" name="phrase" id="phrase6" value="괜찮은데?">
-                <label for="phrase6">"괜찮은데?"</label>
+            <div class="phrase-card" onclick="selectPhrase('알아서 해')">
+                <div class="phrase-emoji">😑</div>
+                <div class="phrase-text">"알아서 해"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('관심 없어')">
-                <input type="radio" name="phrase" id="phrase7" value="관심 없어">
-                <label for="phrase7">"관심 없어"</label>
+            <div class="phrase-card" onclick="selectPhrase('너는 좋겠다')">
+                <div class="phrase-emoji">😒</div>
+                <div class="phrase-text">"너는 좋겠다"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('다 괜찮아')">
-                <input type="radio" name="phrase" id="phrase8" value="다 괜찮아">
-                <label for="phrase8">"다 괜찮아"</label>
+            <div class="phrase-card" onclick="selectPhrase('그냥 물어본 거야')">
+                <div class="phrase-emoji">🙄</div>
+                <div class="phrase-text">"그냥 물어본 거야"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('피곤해')">
-                <input type="radio" name="phrase" id="phrase9" value="피곤해">
-                <label for="phrase9">"피곤해"</label>
+            <div class="phrase-card" onclick="selectPhrase('이해해')">
+                <div class="phrase-emoji">🤔</div>
+                <div class="phrase-text">"이해해"</div>
             </div>
-            <div class="phrase-item" onclick="selectPhrase('재미있겠다')">
-                <input type="radio" name="phrase" id="phrase10" value="재미있겠다">
-                <label for="phrase10">"재미있겠다"</label>
+            <div class="phrase-card" onclick="selectPhrase('괜찮아')">
+                <div class="phrase-emoji">😶</div>
+                <div class="phrase-text">"괜찮아"</div>
             </div>
         </div>
 
-        <p class="text-center mt-3 text-danger" id="selection-warning" style="display: none;">
-            문구를 선택해주세요
-        </p>
-
-        <button type="button" class="btn btn-primary btn-lg mt-4" onclick='showResults();'>16가지 속마음 확인하기</button>
-        <button type="button" class="btn btn-secondary mt-2" onclick='restart();'>처음으로</button>
+        <button type="button" class="btn btn-secondary mt-4" onclick='goBackToMBTI();'>MBTI 다시 선택</button>
     </article>
 
     <!-- 결과화면 -->
     <article class="result">
-        <h2 class="mt-5 text-center">
-            "<span id="selected-phrase"></span>"의 MBTI별 속마음
+        <h2 class="mt-4 text-center result-title">
+            "<span id="selected-phrase"></span>"
         </h2>
-        <p class="text-center text-muted mb-4">같은 말, 16가지 다른 의미</p>
 
-        <div id="results-container" class="mt-4"></div>
-
-        <div class="mt-5 text-center">
-            <button type="button" class="btn btn-primary" onclick='restart();'>다른 문구 보기</button>
-            <button type="button" class="btn btn-success" onclick='shareKakao();'>카카오톡 공유</button>
+        <!-- Step 1: 당신의 진심 -->
+        <div class="result-step mt-4">
+            <h3 class="step-title">
+                <span class="step-number">1</span>
+                <span id="my-mbti"></span>인 당신의 진심
+            </h3>
+            <div class="truth-card">
+                <div id="my-truth"></div>
+            </div>
         </div>
 
-        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        <!-- Step 2: 상대가 들으면 -->
+        <div class="result-step mt-4">
+            <h3 class="step-title">
+                <span class="step-number">2</span>
+                상대방이 들으면...
+            </h3>
+            <p class="text-center mb-3">
+                <button class="btn btn-sm btn-outline-primary" onclick="showRandomPartner()">랜덤 MBTI 보기</button>
+                또는 직접 선택 ↓
+            </p>
+            <div class="partner-mbti-selector">
+                <select id="partner-mbti" class="form-control" onchange="showPartnerInterpretation()">
+                    <option value="">상대방 MBTI 선택</option>
+                    <option value="ISTJ">ISTJ</option>
+                    <option value="ISFJ">ISFJ</option>
+                    <option value="INFJ">INFJ</option>
+                    <option value="INTJ">INTJ</option>
+                    <option value="ISTP">ISTP</option>
+                    <option value="ISFP">ISFP</option>
+                    <option value="INFP">INFP</option>
+                    <option value="INTP">INTP</option>
+                    <option value="ESTP">ESTP</option>
+                    <option value="ESFP">ESFP</option>
+                    <option value="ENFP">ENFP</option>
+                    <option value="ENTP">ENTP</option>
+                    <option value="ESTJ">ESTJ</option>
+                    <option value="ESFJ">ESFJ</option>
+                    <option value="ENFJ">ENFJ</option>
+                    <option value="ENTJ">ENTJ</option>
+                </select>
+            </div>
+            <div id="partner-result" class="partner-card mt-3" style="display: none;">
+                <div class="shock-badge">😱 이렇게 들렸어요!</div>
+                <h4 id="partner-mbti-display"></h4>
+                <div id="partner-interpretation"></div>
+            </div>
+        </div>
+
+        <!-- Step 3: 모든 MBTI 보기 -->
+        <div class="result-step mt-5">
+            <button class="btn btn-outline-secondary btn-block" onclick="toggleAllMBTI()">
+                <span id="toggle-text">📋 모든 MBTI 해석 보기</span>
+            </button>
+            <div id="all-mbti-container" style="display: none;" class="mt-3"></div>
+        </div>
+
+        <!-- 액션 버튼 -->
+        <div class="mt-5 text-center action-buttons">
+            <button type="button" class="btn btn-primary" onclick='restart();'>다른 말 해보기</button>
+            <button type="button" class="btn btn-success" onclick='shareResult();'>연인에게 보내기</button>
+        </div>
+
         <div class="share addthis_inline_share_toolbox mt-4"></div>
     </article>
 
@@ -109,252 +249,302 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <script>
-        // 전역 변수
+        let myMBTI = '';
         let selectedPhraseText = '';
+        const mbtiTypes = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP',
+                          'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];
 
-        // MBTI 목록
-        const mbtiTypes = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'];
-
-        // MBTI별 문구 해석 데이터베이스
-        const translations = {
-            "나는 괜찮아": {
-                "ISTJ": "정말 괜찮음. 문제가 있으면 직접 말했을 것임.",
-                "ISFJ": "괜찮지 않지만 상대방 걱정시키기 싫어서 참는 중.",
-                "INFJ": "괜찮지 않지만 깊이 설명하기 귀찮음. 알아서 눈치챘으면...",
-                "INTJ": "괜찮든 아니든 당신이 도와줄 수 없으니 괜찮다고 하는 것.",
-                "ISTP": "실제로 괜찮음. 혼자 해결할 수 있음.",
-                "ISFP": "괜찮지 않지만 혼자 있고 싶음.",
-                "INFP": "전혀 괜찮지 않음. 위로받고 싶지만 말하기 힘듦.",
-                "INTP": "객관적으로 괜찮음. 감정적으론... 생각 안 해봤음.",
-                "ESTP": "진짜 괜찮음. 이미 다음 일로 넘어감.",
-                "ESFP": "지금은 괜찮은 척. 나중에 친한 친구에게 다 털어놓을 예정.",
-                "ENFP": "50% 괜찮고 50% 괜찮지 않은데 긍정적으로 생각하기로 함.",
-                "ENTP": "괜찮은지 아닌지 논쟁하기 귀찮아서 일단 괜찮다고 함.",
-                "ESTJ": "괜찮음. 할 일 목록에 문제 해결 이미 추가함.",
-                "ESFJ": "괜찮지 않지만 분위기 깨기 싫어서 괜찮다고 함.",
-                "ENFJ": "당신이 괜찮아지길 바라면서 나도 괜찮다고 하는 중.",
-                "ENTJ": "괜찮음. 이미 문제 분석하고 해결책 3가지 생각해둠."
+        // 연애 위험 멘트 데이터베이스
+        const datingPhrases = {
+            "나 화 안 났어": {
+                "ISTJ": "진짜 안 화남. 화나면 직접 말함.",
+                "ISFJ": "화났지만 참고 있음. 폭발 직전.",
+                "INFJ": "겉으론 괜찮은 척. 속으론 정리 중.",
+                "INTJ": "감정 분석 완료. 화낼 가치 없다고 판단.",
+                "ISTP": "별로 안 화남. 금방 잊음.",
+                "ISFP": "많이 화났는데 표현 못함.",
+                "INFP": "엄청 화남. 상처받음. 혼자 울 예정.",
+                "INTP": "논리적으로 화날 이유 없음. 근데 기분은 나쁨.",
+                "ESTP": "진짜 안 화남. 이미 넘김.",
+                "ESFP": "지금은 괜찮은 척. 나중에 친구한테 하소연.",
+                "ENFP": "50% 화남 50% 이해함. 혼란스러움.",
+                "ENTP": "화나진 않는데 토론은 하고 싶음.",
+                "ESTJ": "화남. 근데 생산적이지 않아서 넘어감.",
+                "ESFJ": "엄청 화남. 근데 분위기 깨기 싫어서 참음.",
+                "ENFJ": "당신 기분 배려해서 안 화난 척.",
+                "ENTJ": "화났지만 전략적으로 참는 중."
             },
-            "별로 안 바빠": {
-                "ISTJ": "정말 안 바쁨. 스케줄에 여유 있음.",
-                "ISFJ": "바쁘지만 당신을 도와주고 싶음.",
-                "INFJ": "바쁘지만 당신이 중요한 사람이라 시간 낼 수 있음.",
-                "INTJ": "안 바쁘다는 뜻이 아니라 우선순위 조정 가능하다는 뜻.",
-                "ISTP": "지금 이 순간은 안 바쁨.",
-                "ISFP": "바쁘지만 거절하기 미안함.",
-                "INFP": "바쁘지만 혼자 있는 시간이라 바쁘다고 말하기 애매함.",
-                "INTP": "물리적으론 안 바쁨. 정신적으론 바쁨.",
-                "ESTP": "멀티태스킹 가능해서 안 바쁨.",
-                "ESFP": "바빠도 재미있는 일이면 시간 낼 수 있음!",
-                "ENFP": "바쁘지만 새로운 일은 언제나 환영!",
-                "ENTP": "안 바쁘다는 건 거짓말. 그냥 흥미로우면 할 것임.",
-                "ESTJ": "안 바쁨. 효율적으로 일처리해서 시간 여유 있음.",
-                "ESFJ": "바쁘지만 당신과 시간 보내고 싶음.",
-                "ENFJ": "바쁘지만 당신이 필요로 하니 시간 낼 수 있음.",
-                "ENTJ": "바쁘지만 가치 있는 일이면 스케줄 조정 가능."
-            },
-            "나중에 연락할게": {
-                "ISTJ": "정말 나중에 연락함. 메모해둠.",
-                "ISFJ": "나중에 연락할 생각이지만 깜빡할까봐 걱정됨.",
-                "INFJ": "나중에 연락할 수도 있고 안 할 수도 있음. 상황 봐서.",
-                "INTJ": "필요하면 연락함. 필요 없으면 안 함.",
-                "ISTP": "기억나면 연락함.",
-                "ISFP": "연락하고 싶긴 한데 용기가 필요함.",
-                "INFP": "연락하고 싶지만 완벽한 타이밍을 기다리다 잊어버림.",
-                "INTP": "연락할 의향은 있으나 실행 확률 50%.",
-                "ESTP": "생각나면 바로 연락함. 안 나면 안 함.",
-                "ESFP": "진짜 연락할게! 근데 언제인지는 나도 몰라.",
-                "ENFP": "연락하려고 했는데 다른 일 하다가 까먹음.",
-                "ENTP": "70% 확률로 까먹음.",
-                "ESTJ": "정확한 시간에 연락함. 약속은 지킴.",
-                "ESFJ": "꼭 연락함! 알람도 설정해둠.",
-                "ENFJ": "당신을 위해 연락할 거지만 다른 사람들 챙기다 조금 늦을 수도.",
-                "ENTJ": "필요시 연락함. 안 하면 필요 없다는 뜻."
+            "네 맘대로 해": {
+                "ISTJ": "정말 네 선택 존중함.",
+                "ISFJ": "화났지만 맞춰주고 싶음.",
+                "INFJ": "실망함. 기대했는데...",
+                "INTJ": "네가 판단해. 나는 상관없음.",
+                "ISTP": "진짜 아무거나 상관없음.",
+                "ISFP": "화났지만 싸우기 싫음.",
+                "INFP": "엄청 서운함. 배려 없다고 느낌.",
+                "INTP": "합리적 선택이면 OK.",
+                "ESTP": "빨리 결정하고 넘어가자.",
+                "ESFP": "화났어! 근데 표현은 안 함.",
+                "ENFP": "서운하지만 이해하려고 노력 중.",
+                "ENTP": "맘대로 하라는데 정말 맘대로 할 거임.",
+                "ESTJ": "그럼 효율적으로 내가 결정함.",
+                "ESFJ": "삐짐. 같이 정하고 싶었는데.",
+                "ENFJ": "네가 원하면 맞춰줄게. (속상하지만)",
+                "ENTJ": "그럼 내 방식대로 함. 후회 없기."
             },
             "아무거나 좋아": {
-                "ISTJ": "정말 아무거나 좋음. 다 괜찮음.",
-                "ISFJ": "사실 선호하는 게 있지만 맞춰주고 싶음.",
-                "INFJ": "아무거나 좋지 않지만 선택하기 귀찮음.",
-                "INTJ": "효율적이고 논리적인 선택이면 뭐든 좋음.",
-                "ISTP": "진짜 아무거나 상관없음.",
-                "ISFP": "선호는 있지만 갈등 싫어서 아무거나.",
-                "INFP": "마음속으론 원하는 게 있지만 말하기 부담스러움.",
-                "INTP": "선택의 결과가 비슷하면 뭐든 상관없음.",
-                "ESTP": "빨리 정하고 다음으로 넘어가자.",
-                "ESFP": "다 좋아! 뭐든 즐거우면 돼!",
-                "ENFP": "아무거나 좋긴 한데 네가 고르면 의견 제시할 수도 있음.",
-                "ENTP": "아무거나 좋다는 건 거짓말. 네가 고르면 토론 시작.",
-                "ESTJ": "빨리 효율적으로 결정하자.",
-                "ESFJ": "당신이 좋은 게 나도 좋아.",
-                "ENFJ": "당신이 행복하면 나도 행복해.",
-                "ENTJ": "합리적인 선택이면 뭐든. 빨리 정하자."
+                "ISTJ": "정말 다 괜찮음.",
+                "ISFJ": "선호 있지만 맞춰주고 싶음.",
+                "INFJ": "사실 원하는 거 있는데 말 안 함.",
+                "INTJ": "효율적이면 뭐든.",
+                "ISTP": "진짜 아무거나.",
+                "ISFP": "갈등 싫어서 아무거나.",
+                "INFP": "마음속엔 원하는 게 있음.",
+                "INTP": "결과 비슷하면 무관.",
+                "ESTP": "빨리 정해.",
+                "ESFP": "다 좋아!",
+                "ENFP": "좋긴 한데 네가 고르면 의견 낼 수도.",
+                "ENTP": "아무거나는 거짓말. 토론 시작.",
+                "ESTJ": "빨리 효율적으로 결정.",
+                "ESFJ": "네가 좋으면 나도 좋아.",
+                "ENFJ": "네 행복이 내 행복.",
+                "ENTJ": "합리적이면 뭐든. 빨리 정해."
             },
-            "생각해볼게": {
-                "ISTJ": "실제로 신중하게 생각해볼 것임.",
-                "ISFJ": "거절하기 미안해서 일단 생각해본다고 함.",
-                "INFJ": "이미 답은 정했지만 바로 말하기 부담스러움.",
-                "INTJ": "모든 변수를 분석한 후 답변 예정.",
-                "ISTP": "생각해보긴 할 건데 결론은 안 날 수도.",
-                "ISFP": "부드럽게 거절하는 중.",
-                "INFP": "생각이 너무 많아서 정리가 안 됨.",
-                "INTP": "정말로 깊이 생각해볼 예정. 시간 좀 걸릴 듯.",
-                "ESTP": "지금은 모르겠고 나중에 즉흥적으로 결정할게.",
-                "ESFP": "생각하긴 할 건데 재미있으면 바로 할 수도.",
-                "ENFP": "생각해보다가 다른 생각하다가 잊어버릴 듯.",
-                "ENTP": "여러 시나리오 시뮬레이션 돌려볼 예정.",
-                "ESTJ": "장단점 분석 후 24시간 내 답변.",
-                "ESFJ": "생각해보고 주변 사람들 의견도 물어볼게.",
-                "ENFJ": "여러 사람에게 미칠 영향 고려 중.",
-                "ENTJ": "전략적 분석 후 최적의 답 도출 예정."
+            "별로 안 바빠": {
+                "ISTJ": "정말 안 바쁨.",
+                "ISFJ": "바쁘지만 널 도와주고 싶음.",
+                "INFJ": "바쁘지만 넌 중요해.",
+                "INTJ": "우선순위 조정 가능.",
+                "ISTP": "지금은 안 바쁨.",
+                "ISFP": "바쁜데 거절 못함.",
+                "INFP": "혼자 있는 시간인데 바쁘다 하기 애매.",
+                "INTP": "물리적으론 안 바쁨.",
+                "ESTP": "멀티태스킹 가능.",
+                "ESFP": "재미있으면 시간 낼 수 있어!",
+                "ENFP": "새로운 일 환영!",
+                "ENTP": "흥미로우면 할게.",
+                "ESTJ": "효율적으로 처리해서 시간 있음.",
+                "ESFJ": "바쁘지만 너랑 보내고 싶어.",
+                "ENFJ": "네가 필요하니 시간 낼게.",
+                "ENTJ": "가치 있으면 스케줄 조정."
             },
-            "괜찮은데?": {
-                "ISTJ": "객관적으로 괜찮음.",
-                "ISFJ": "괜찮지 않아도 괜찮다고 할 성격.",
-                "INFJ": "괜찮지 않은데 왜 괜찮지 않은지 설명하기 싫음.",
-                "INTJ": "논리적으로 문제없음. 감정은 모름.",
-                "ISTP": "나한테는 괜찮음.",
-                "ISFP": "괜찮지 않지만 비판하기 싫음.",
-                "INFP": "괜찮지 않지만 상처주기 싫음.",
-                "INTP": "기술적으론 괜찮음.",
-                "ESTP": "괜찮음. 뭐가 문제?",
-                "ESFP": "다들 괜찮다는데 나만 이상한가?",
-                "ENFP": "괜찮긴 한데 더 좋을 수도 있을 것 같은데?",
-                "ENTP": "괜찮냐고 물으면 괜찮지 않다고 할 예정.",
-                "ESTJ": "기준에 부합하면 괜찮음.",
-                "ESFJ": "다른 사람들이 괜찮다면 나도 괜찮음.",
-                "ENFJ": "당신이 괜찮다면 나도 괜찮음.",
-                "ENTJ": "효율적이면 괜찮음."
+            "나중에 얘기하자": {
+                "ISTJ": "진짜 나중에 얘기함. 메모함.",
+                "ISFJ": "얘기할 건데 깜빡할까 걱정.",
+                "INFJ": "지금은 정리 안 됨. 시간 필요.",
+                "INTJ": "분석 시간 필요.",
+                "ISTP": "지금은 귀찮음.",
+                "ISFP": "지금은 대화 부담됨.",
+                "INFP": "감정 정리 시간 필요.",
+                "INTP": "논리적으로 정리 중.",
+                "ESTP": "나중에. (까먹을 수도)",
+                "ESFP": "지금 분위기 아님.",
+                "ENFP": "다른 생각하다 까먹을 듯.",
+                "ENTP": "70% 확률로 까먹음.",
+                "ESTJ": "나중에 = 정확한 시간 정하자.",
+                "ESFJ": "지금 분위기 안 좋아서.",
+                "ENFJ": "지금은 감정적임. 시간 주세요.",
+                "ENTJ": "전략 짜고 얘기하자."
             },
-            "관심 없어": {
-                "ISTJ": "정말 관심 없음.",
-                "ISFJ": "관심 있지만 부담주기 싫어서.",
-                "INFJ": "엄청 관심 있는데 티내기 싫음.",
-                "INTJ": "효율성 없으면 관심 없음.",
-                "ISTP": "지금은 관심 없음.",
-                "ISFP": "관심 있지만 내색 안 함.",
-                "INFP": "관심 많은데 거절당할까 봐 먼저 차단.",
-                "INTP": "그 주제는 관심 없음. 다른 건 관심 있을 수도.",
-                "ESTP": "진짜 관심 없음. 다음!",
-                "ESFP": "지금은 관심 없는데 나중엔 관심 있을 수도.",
-                "ENFP": "관심 없는 척하지만 사실 조금 관심 있음.",
-                "ENTP": "관심 없다고 하면 더 얘기해줄까 봐.",
-                "ESTJ": "시간 낭비라 관심 없음.",
-                "ESFJ": "관심 있는데 튀고 싶지 않음.",
-                "ENFJ": "당신이 관심 있으면 들어줄게.",
-                "ENTJ": "가치 없으면 관심 없음."
+            "알아서 해": {
+                "ISTJ": "네 역량 믿음.",
+                "ISFJ": "네가 편한 대로.",
+                "INFJ": "너도 생각이 있을 거라 믿음.",
+                "INTJ": "최적의 방법 네가 찾아.",
+                "ISTP": "진짜 상관없음.",
+                "ISFP": "네 방식 존중.",
+                "INFP": "간섭하기 싫음.",
+                "INTP": "네가 알아서 잘할 듯.",
+                "ESTP": "빨리 처리해.",
+                "ESFP": "네가 더 잘 알잖아!",
+                "ENFP": "자유롭게 해!",
+                "ENTP": "창의적으로 해봐.",
+                "ESTJ": "책임지고 해.",
+                "ESFJ": "네 의견 듣고 싶어.",
+                "ENFJ": "네 선택 믿어.",
+                "ENTJ": "결과만 좋으면 됨."
             },
-            "다 괜찮아": {
-                "ISTJ": "점검 완료. 실제로 다 괜찮음.",
-                "ISFJ": "괜찮지 않아도 다 괜찮다고 할 거임.",
-                "INFJ": "표면적으론 괜찮은데 깊이 들어가면...",
-                "INTJ": "시스템상 문제없음.",
-                "ISTP": "눈에 보이는 건 다 괜찮음.",
-                "ISFP": "다 괜찮았으면 좋겠어.",
-                "INFP": "다 괜찮지 않지만 괜찮아지길 바람.",
-                "INTP": "대부분 괜찮음. 몇 개는 모름.",
-                "ESTP": "문제 생기면 그때 해결하면 됨.",
-                "ESFP": "지금 이 순간은 다 괜찮아!",
-                "ENFP": "다 괜찮을 거야! 긍정 에너지!",
-                "ENTP": "괜찮은지 아닌지는 관점에 달림.",
-                "ESTJ": "체크리스트 완료. 다 괜찮음.",
-                "ESFJ": "모두 행복해 보이니 다 괜찮은 듯.",
-                "ENFJ": "다들 괜찮다고 하니 괜찮은 거겠지.",
-                "ENTJ": "목표 달성 중. 다 괜찮음."
+            "너는 좋겠다": {
+                "ISTJ": "객관적 사실 진술.",
+                "ISFJ": "약간 부러움.",
+                "INFJ": "네 상황이 궁금함.",
+                "INTJ": "비교 분석 중.",
+                "ISTP": "그냥 한 말.",
+                "ISFP": "순수하게 부러움.",
+                "INFP": "나도 그러고 싶은데...",
+                "INTP": "흥미로운 차이점.",
+                "ESTP": "부럽네!",
+                "ESFP": "나도 하고 싶어!",
+                "ENFP": "너 좋겠다! 나도!",
+                "ENTP": "왜 그런지 분석 중.",
+                "ESTJ": "네가 효율적이네.",
+                "ESFJ": "진짜 좋겠다.",
+                "ENFJ": "네가 행복해서 좋아.",
+                "ENTJ": "네 전략 괜찮네."
             },
-            "피곤해": {
-                "ISTJ": "실제로 피곤함. 휴식 필요.",
-                "ISFJ": "육체적, 정신적, 감정적으로 다 피곤함.",
-                "INFJ": "사람들한테 지침. 혼자 있고 싶음.",
-                "INTJ": "비효율적인 일들 때문에 에너지 소진.",
-                "ISTP": "몸이 피곤함.",
-                "ISFP": "감정 노동으로 지침.",
-                "INFP": "세상이 피곤함.",
-                "INTP": "뇌가 과열됨.",
-                "ESTP": "잠깐 피곤한 거. 곧 회복.",
-                "ESFP": "피곤하지만 놀 수 있음.",
-                "ENFP": "피곤한데 잠은 안 옴.",
-                "ENTP": "육체는 피곤한데 머리는 멀쩡.",
-                "ESTJ": "할 일 많아서 피곤함.",
-                "ESFJ": "다른 사람 챙기느라 피곤함.",
-                "ENFJ": "감정 소모가 심함.",
-                "ENTJ": "목표 달성까지 쉬지 못해 피곤함."
+            "그냥 물어본 거야": {
+                "ISTJ": "정말 궁금해서 물어봄.",
+                "ISFJ": "괜히 물어봤나 걱정됨.",
+                "INFJ": "깊은 의도 있음.",
+                "INTJ": "정보 수집 중.",
+                "ISTP": "진짜 그냥 물어봄.",
+                "ISFP": "별 뜻 없음.",
+                "INFP": "사실 신경 쓰임.",
+                "INTP": "호기심.",
+                "ESTP": "그냥 물어봄.",
+                "ESFP": "별 생각 없이 물어봄.",
+                "ENFP": "갑자기 궁금해짐.",
+                "ENTP": "토론 시작점.",
+                "ESTJ": "답변 필요.",
+                "ESFJ": "관심 있어서.",
+                "ENFJ": "네 생각 궁금해.",
+                "ENTJ": "데이터 수집."
             },
-            "재미있겠다": {
-                "ISTJ": "객관적으로 흥미로울 것 같음.",
-                "ISFJ": "재미없어도 같이 해줄게.",
-                "INFJ": "재미있을 것 같긴 한데 에너지 소모 계산 중.",
-                "INTJ": "지적 호기심이 생김.",
-                "ISTP": "실제로 재미있을 것 같음.",
-                "ISFP": "새로운 경험은 언제나 환영.",
-                "INFP": "상상만으로 벌써 재미있음.",
-                "INTP": "흥미로운 실험이 될 듯.",
-                "ESTP": "재미있을 것 같으니 바로 해보자!",
-                "ESFP": "완전 재미있겠다! 언제 해?!",
-                "ENFP": "엄청 재미있겠다! 다른 것도 해보자!",
-                "ENTP": "재미있겠다. 더 재미있게 만들 방법은?",
-                "ESTJ": "효율적이면서 재미있겠다.",
-                "ESFJ": "다같이 하면 재미있겠다!",
-                "ENFJ": "다들 즐거워할 것 같아.",
-                "ENTJ": "재미와 생산성을 동시에 달성 가능."
+            "이해해": {
+                "ISTJ": "논리적으로 이해함.",
+                "ISFJ": "네 입장 이해함.",
+                "INFJ": "깊이 공감함.",
+                "INTJ": "이해는 함. 동의는 별개.",
+                "ISTP": "그럴 수 있지.",
+                "ISFP": "네 감정 이해해.",
+                "INFP": "진심으로 이해함.",
+                "INTP": "논리는 이해. 감정은...",
+                "ESTP": "OK 넘어가자.",
+                "ESFP": "응응 이해해!",
+                "ENFP": "완전 이해해!",
+                "ENTP": "이해는 하는데...",
+                "ESTJ": "이해함. 해결책은?",
+                "ESFJ": "네 마음 이해해.",
+                "ENFJ": "완전히 공감해.",
+                "ENTJ": "이해함. 다음은?"
+            },
+            "괜찮아": {
+                "ISTJ": "정말 괜찮음.",
+                "ISFJ": "괜찮지 않지만 참음.",
+                "INFJ": "깊이 생각 중.",
+                "INTJ": "도움 필요 없음.",
+                "ISTP": "혼자 해결 가능.",
+                "ISFP": "혼자 있고 싶음.",
+                "INFP": "전혀 괜찮지 않음.",
+                "INTP": "객관적으론 괜찮음.",
+                "ESTP": "이미 넘어감.",
+                "ESFP": "괜찮은 척.",
+                "ENFP": "50:50.",
+                "ENTP": "논쟁 귀찮음.",
+                "ESTJ": "문제 해결 중.",
+                "ESFJ": "분위기 깨기 싫음.",
+                "ENFJ": "네가 괜찮길 바람.",
+                "ENTJ": "해결책 이미 준비함."
             }
         };
 
-        function showPhraseSelector() {
+        function showMBTISelector() {
             $(".start").hide();
+            $(".mbti-selector").show();
+        }
+
+        function selectMBTI(mbti) {
+            myMBTI = mbti;
+            $("#selected-mbti-display").text(mbti);
+            $(".mbti-selector").hide();
             $(".phrase-selector").show();
+        }
+
+        function goBackToMBTI() {
+            $(".phrase-selector").hide();
+            $(".mbti-selector").show();
         }
 
         function selectPhrase(phrase) {
             selectedPhraseText = phrase;
-            // 라디오 버튼 체크
-            $("input[value='" + phrase + "']").prop('checked', true);
+            showResults();
         }
 
         function showResults() {
-            // 선택된 문구 확인
-            if (!selectedPhraseText) {
-                $("#selection-warning").show();
-                return;
-            }
-
-            // 결과 표시
             $("#selected-phrase").text(selectedPhraseText);
+            $("#my-mbti").text(myMBTI);
+            $("#my-truth").text(datingPhrases[selectedPhraseText][myMBTI]);
 
-            let resultsHTML = '';
-            mbtiTypes.forEach(mbti => {
-                const meaning = translations[selectedPhraseText][mbti];
-                resultsHTML += `
-                    <div class="mbti-result-card">
-                        <div class="mbti-header">
-                            <img src="${mbti}.jpg" alt="${mbti}" class="mbti-icon">
-                            <span class="mbti-type">${mbti}</span>
-                        </div>
-                        <div class="mbti-meaning">${meaning}</div>
-                    </div>
-                `;
-            });
-
-            $("#results-container").html(resultsHTML);
+            // 초기화
+            $("#partner-result").hide();
+            $("#partner-mbti").val("");
+            $("#all-mbti-container").hide();
+            $("#toggle-text").text("📋 모든 MBTI 해석 보기");
 
             $(".phrase-selector").hide();
             $(".result").show();
+
+            // 스크롤 최상단으로
+            window.scrollTo(0, 0);
+        }
+
+        function showRandomPartner() {
+            // 자기 자신을 제외한 MBTI 선택
+            const others = mbtiTypes.filter(t => t !== myMBTI);
+            const randomMBTI = others[Math.floor(Math.random() * others.length)];
+            $("#partner-mbti").val(randomMBTI);
+            showPartnerInterpretation();
+        }
+
+        function showPartnerInterpretation() {
+            const partnerMBTI = $("#partner-mbti").val();
+            if (!partnerMBTI) return;
+
+            $("#partner-mbti-display").text(partnerMBTI + "인 상대방");
+            $("#partner-interpretation").text(datingPhrases[selectedPhraseText][partnerMBTI]);
+            $("#partner-result").slideDown();
+        }
+
+        function toggleAllMBTI() {
+            const container = $("#all-mbti-container");
+            if (container.is(":visible")) {
+                container.slideUp();
+                $("#toggle-text").text("📋 모든 MBTI 해석 보기");
+            } else {
+                // 모든 MBTI 생성
+                let html = '<div class="all-mbti-grid">';
+                mbtiTypes.forEach(mbti => {
+                    const meaning = datingPhrases[selectedPhraseText][mbti];
+                    const isMe = mbti === myMBTI ? ' <span class="badge badge-primary">나</span>' : '';
+                    html += `
+                        <div class="mini-mbti-card">
+                            <div class="mini-mbti-header">
+                                <img src="${mbti}.jpg" alt="${mbti}" class="mini-mbti-icon">
+                                <span class="mini-mbti-type">${mbti}${isMe}</span>
+                            </div>
+                            <div class="mini-mbti-meaning">${meaning}</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                container.html(html);
+                container.slideDown();
+                $("#toggle-text").text("📋 접기");
+            }
         }
 
         function restart() {
+            myMBTI = '';
             selectedPhraseText = '';
-            $("input[type='radio']").prop('checked', false);
-            $("#selection-warning").hide();
             $(".result").hide();
-            $(".phrase-selector").hide();
             $(".start").show();
+            window.scrollTo(0, 0);
         }
 
-        function shareKakao() {
-            alert('카카오톡 공유 기능은 카카오 개발자 등록 후 사용 가능합니다.');
+        function shareResult() {
+            const text = `"${selectedPhraseText}"\n\n${myMBTI}인 나: ${datingPhrases[selectedPhraseText][myMBTI]}\n\n너는 어떻게 들릴까?\nhttps://mbtiexplain.netlify.app`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'MBTI별 연애할 때 위험한 말',
+                    text: text
+                });
+            } else {
+                alert('공유 기능은 모바일에서 사용 가능합니다!\n\n' + text);
+            }
         }
     </script>
 
-    <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ffd42a25cb08056"></script>
 </body>
 </html>
