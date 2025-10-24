@@ -28,30 +28,49 @@
 <body class="container">
     <!-- 시작화면 -->
     <article class="start">
-        <div class="warning-badge">🚨 관계 위기 주의보</div>
-        <h1 class="mt-4 text-center mb-4">당신의 여자친구가<br>"괜찮아"라고 할 때</h1>
-        <div class="example-box mt-4">
-            <div class="example-grid">
-                <div class="example-item">
-                    <div class="example-label">ISTJ 여자친구</div>
-                    <div class="example-text">✅ 정말 괜찮음</div>
-                    <div class="example-subtext">→ 그대로 믿어도 OK</div>
-                </div>
-                <div class="example-item danger">
-                    <div class="example-label">INFP 여자친구</div>
-                    <div class="example-text">💥 엄청 화남!!</div>
-                    <div class="example-subtext">→ 위로 필요!</div>
-                </div>
+        <h1 class="text-center mb-2">MBTI 관계 도우미</h1>
+        <p class="text-center text-muted mb-5">어떤 도움이 필요하세요?</p>
+
+        <div class="feature-grid">
+            <div class="feature-card" onclick="startTranslator()">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">속마음 번역기</h3>
+                <p class="feature-desc">"괜찮아"의 진짜 의미는?</p>
+            </div>
+
+            <div class="feature-card" onclick="startQuizFlow()">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">1분 MBTI 퀴즈</h3>
+                <p class="feature-desc">빠르게 MBTI 알아보기</p>
+            </div>
+
+            <div class="feature-card" onclick="startSimulatorFlow()">
+                <div class="feature-icon">🎮</div>
+                <h3 class="feature-title">갈등 시뮬레이터</h3>
+                <p class="feature-desc">상황별 대처법 연습</p>
+            </div>
+
+            <div class="feature-card" onclick="startGiftFlow()">
+                <div class="feature-icon">💝</div>
+                <h3 class="feature-title">선물 추천</h3>
+                <p class="feature-desc">MBTI별 완벽한 선물</p>
+            </div>
+
+            <div class="feature-card" onclick="startDateFlow()">
+                <div class="feature-icon">💑</div>
+                <h3 class="feature-title">데이트 코스</h3>
+                <p class="feature-desc">맞춤 데이트 플랜</p>
+            </div>
+
+            <div class="feature-card" onclick="startCompatFlow()">
+                <div class="feature-icon">💕</div>
+                <h3 class="feature-title">궁합 테스트</h3>
+                <p class="feature-desc">우리의 MBTI 궁합은?</p>
             </div>
         </div>
-        <p class="text-center mt-4 description">
-            <strong>대처법을 모르면 관계가 끝납니다</strong><br>
-            성별 × MBTI별 진짜 의미와 올바른 대처법
-        </p>
-        <button type="button" class="btn btn-danger btn-lg mt-4" onclick='showRelationship();'>지금 바로 확인하기</button>
 
         <!-- AdSense Ad -->
-        <div class="mt-4 text-center">
+        <div class="mt-5 text-center">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-8245797797545485"
@@ -282,31 +301,6 @@
                 <div class="phrase-emoji">🤔</div>
                 <div class="phrase-text">"생각 좀 해볼게"</div>
             </div>
-        </div>
-
-        <div class="mt-5 text-center">
-            <div class="simulator-divider">
-                <span>또는</span>
-            </div>
-            <button type="button" class="btn btn-info btn-lg mt-3" onclick='startSimulator("late");'>
-                🎮 갈등 상황 시뮬레이터 체험하기
-            </button>
-            <p class="text-muted mt-2 small">실제 상황에서 어떻게 대처할지 연습해보세요!</p>
-
-            <button type="button" class="btn btn-warning btn-lg mt-2" onclick='startGiftRecommendation();'>
-                💝 MBTI별 선물 추천 받기
-            </button>
-            <p class="text-muted mt-2 small">생일, 기념일, 사과할 때 완벽한 선물!</p>
-
-            <button type="button" class="btn btn-success btn-lg mt-2" onclick='startDateRecommendation();'>
-                💑 완벽한 데이트 코스 추천
-            </button>
-            <p class="text-muted mt-2 small">MBTI별 맞춤 데이트 코스 3가지!</p>
-
-            <button type="button" class="btn btn-danger btn-lg mt-2" onclick='startCompatibilityTest();'>
-                💕 우리 MBTI 궁합은?
-            </button>
-            <p class="text-muted mt-2 small">커플 궁합 점수와 관계 팁!</p>
         </div>
 
         <button type="button" class="btn btn-secondary mt-4" onclick='goBackToMBTI();'>MBTI 다시 선택</button>
@@ -646,6 +640,39 @@
         let relationship = ''; // 내부 처리용 관계
         let mbti = '';
         let phrase = '';
+        let currentFeature = ''; // 현재 선택한 기능
+
+        // 각 기능 진입 함수들
+        function startTranslator() {
+            currentFeature = 'translator';
+            showRelationship();
+        }
+
+        function startQuizFlow() {
+            currentFeature = 'quiz';
+            // 퀴즈는 관계만 선택하고 바로 MBTI 선택 화면으로 (퀴즈 버튼 보여주기 위해)
+            showRelationship();
+        }
+
+        function startSimulatorFlow() {
+            currentFeature = 'simulator';
+            showRelationship();
+        }
+
+        function startGiftFlow() {
+            currentFeature = 'gift';
+            showRelationship();
+        }
+
+        function startDateFlow() {
+            currentFeature = 'date';
+            showRelationship();
+        }
+
+        function startCompatFlow() {
+            currentFeature = 'compat';
+            showRelationship();
+        }
 
         function showRelationship() {
             $(".start").hide();
@@ -675,7 +702,24 @@
             mbti = m;
             $("#selected-mbti").text(m);
             $(".mbti-selector").hide();
-            $(".phrase-selector").show();
+
+            // 기능별 분기
+            if (currentFeature === 'translator') {
+                $(".phrase-selector").show();
+            } else if (currentFeature === 'quiz') {
+                startQuiz();
+            } else if (currentFeature === 'simulator') {
+                startSimulator("late");
+            } else if (currentFeature === 'gift') {
+                startGiftRecommendation();
+            } else if (currentFeature === 'date') {
+                startDateRecommendation();
+            } else if (currentFeature === 'compat') {
+                startCompatibilityTest();
+            } else {
+                $(".phrase-selector").show();
+            }
+
             window.scrollTo(0, 0);
         }
 
