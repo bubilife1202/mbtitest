@@ -26,7 +26,9 @@ body {
 .mbti-selector,
 .quiz-screen,
 .phrase-selector,
-.result {
+.result,
+.simulator-screen,
+.simulator-result {
     display: none;
 }
 
@@ -785,5 +787,221 @@ body {
     .btn-quiz {
         font-size: 1rem;
         padding: 10px 20px;
+    }
+}
+
+/* ========== 갈등 상황 시뮬레이터 ========== */
+
+/* Divider */
+.simulator-divider {
+    position: relative;
+    text-align: center;
+    margin: 30px 0 20px;
+}
+
+.simulator-divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+}
+
+.simulator-divider span {
+    position: relative;
+    background: white;
+    padding: 0 20px;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+/* 시뮬레이터 화면 */
+.simulator-screen,
+.simulator-result {
+    width: 100%;
+    max-width: 800px;
+}
+
+.simulator-emoji {
+    font-size: 4rem;
+    margin: 10px 0;
+}
+
+/* 상황 설명 */
+.simulator-situation {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-left: 5px solid #2196f3;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+}
+
+.simulator-situation h4 {
+    color: #1976d2;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.simulator-situation p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+}
+
+/* 선택지 */
+.simulator-choices h4 {
+    color: #7b1fa2;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.simulator-choice-btn {
+    display: block;
+    width: 100%;
+    background: white;
+    border: 3px solid #e1bee7;
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #6a1b9a;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.simulator-choice-btn:hover {
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+    border-color: #9c27b0;
+    color: white;
+    transform: translateX(10px);
+    box-shadow: 0 4px 20px rgba(156, 39, 176, 0.4);
+}
+
+.simulator-choice-btn:active {
+    transform: translateX(10px) scale(0.98);
+}
+
+/* 반응 박스 */
+.simulator-reaction h4 {
+    color: #f57c00;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.reaction-box {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 3px solid #ff9800;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+}
+
+.reaction-emotion {
+    font-size: 5rem;
+    margin-bottom: 15px;
+}
+
+.reaction-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e65100;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.reaction-analysis {
+    font-size: 1.1rem;
+    color: #555;
+    font-style: italic;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+
+/* 결과 화면 */
+.result-grade-box {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    border: 4px solid #9c27b0;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(156, 39, 176, 0.3);
+}
+
+.grade-emoji {
+    font-size: 6rem;
+    margin-bottom: 20px;
+}
+
+.grade-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #6a1b9a;
+    margin-bottom: 15px;
+}
+
+.grade-score {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #7b1fa2;
+}
+
+.result-feedback {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-left: 5px solid #4caf50;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+}
+
+.result-feedback h4 {
+    color: #2e7d32;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.result-feedback p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .simulator-emoji {
+        font-size: 3rem;
+    }
+
+    .simulator-choice-btn {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+
+    .reaction-emotion {
+        font-size: 4rem;
+    }
+
+    .reaction-text {
+        font-size: 1.3rem;
+    }
+
+    .grade-emoji {
+        font-size: 4rem;
+    }
+
+    .grade-title {
+        font-size: 1.5rem;
+    }
+
+    .grade-score {
+        font-size: 1.2rem;
     }
 }

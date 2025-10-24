@@ -284,6 +284,16 @@
             </div>
         </div>
 
+        <div class="mt-5 text-center">
+            <div class="simulator-divider">
+                <span>또는</span>
+            </div>
+            <button type="button" class="btn btn-info btn-lg mt-3" onclick='startSimulator("late");'>
+                🎮 갈등 상황 시뮬레이터 체험하기
+            </button>
+            <p class="text-muted mt-2 small">실제 상황에서 어떻게 대처할지 연습해보세요!</p>
+        </div>
+
         <button type="button" class="btn btn-secondary mt-4" onclick='goBackToMBTI();'>MBTI 다시 선택</button>
     </article>
 
@@ -339,6 +349,74 @@
         <div class="share addthis_inline_share_toolbox mt-4"></div>
     </article>
 
+    <!-- 갈등 상황 시뮬레이터 -->
+    <article class="simulator-screen">
+        <div class="simulator-header mt-4">
+            <h2 id="simulator-title" class="text-center"></h2>
+            <p class="text-center simulator-emoji" id="simulator-emoji"></p>
+            <p class="text-center text-muted">
+                <span class="badge badge-primary"><span id="selected-person-sim"></span> (<span id="selected-mbti-sim"></span>)</span>
+                단계 <span id="simulator-progress"></span>
+            </p>
+        </div>
+
+        <!-- 상황 설명 -->
+        <div class="simulator-situation mt-4">
+            <h4>📖 상황</h4>
+            <p id="simulator-situation"></p>
+        </div>
+
+        <!-- 선택지 -->
+        <div id="simulator-choices" class="simulator-choices mt-4">
+            <h4>💬 어떻게 할까요?</h4>
+            <!-- JavaScript로 동적 생성 -->
+        </div>
+
+        <!-- 상대방 반응 -->
+        <div id="simulator-reaction" class="simulator-reaction mt-4" style="display: none;">
+            <h4>💭 <span id="selected-person-reaction"></span>의 반응</h4>
+            <div class="reaction-box">
+                <div class="reaction-emotion" id="reaction-emotion"></div>
+                <div class="reaction-text" id="reaction-text"></div>
+                <div class="reaction-analysis" id="reaction-analysis"></div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <button id="next-stage-btn" type="button" class="btn btn-primary btn-lg" onclick='nextSimulatorStage();'>다음 단계로 →</button>
+                <button id="finish-simulator-btn" type="button" class="btn btn-success btn-lg" onclick='finishSimulator();'>결과 보기</button>
+            </div>
+        </div>
+    </article>
+
+    <!-- 시뮬레이터 결과 -->
+    <article class="simulator-result">
+        <div class="result-header mt-4">
+            <h2 class="text-center">🎮 시뮬레이터 결과</h2>
+            <p class="text-center mt-3">
+                <span class="badge badge-info badge-lg">
+                    <span id="result-person"></span>
+                    (<span id="result-mbti-type"></span>)
+                </span>
+            </p>
+        </div>
+
+        <div class="result-grade-box mt-4">
+            <div class="grade-emoji" id="result-emoji"></div>
+            <h3 id="result-grade" class="grade-title"></h3>
+            <p id="result-score" class="grade-score"></p>
+        </div>
+
+        <div class="result-feedback mt-4">
+            <h4>📝 피드백</h4>
+            <p id="result-feedback"></p>
+        </div>
+
+        <div class="mt-5 text-center action-buttons">
+            <button type="button" class="btn btn-primary" onclick='restartFromSimulator();'>🔄 처음으로</button>
+            <button type="button" class="btn btn-warning" onclick='retrySimulator();'>🎮 다시 도전</button>
+        </div>
+    </article>
+
     <article class="kakao_ad mt-5">
         <ins class="kakao_ad_area" style="display:none;"
             data-ad-unit    = "DAN-GMmltHMuUP8Mt9J7"
@@ -369,6 +447,7 @@
 
     <script src="data.js"></script>
     <script src="quiz.js"></script>
+    <script src="simulator.js"></script>
     <script>
         let personLabel = '';  // 표시할 레이블 (예: "내 여자친구")
         let gender = '';       // 내부 처리용 성별
