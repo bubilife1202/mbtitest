@@ -24,6 +24,7 @@ body {
 .relationship-selector,
 .gender-selector,
 .mbti-selector,
+.quiz-screen,
 .phrase-selector,
 .result {
     display: none;
@@ -676,5 +677,113 @@ body {
 
     .action-buttons .btn {
         min-width: 120px;
+    }
+}
+
+/* ========== MBTI 퀴즈 ========== */
+
+/* 퀴즈 버튼 */
+.btn-quiz {
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-quiz:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+}
+
+/* 퀴즈 화면 */
+.quiz-screen {
+    width: 100%;
+    max-width: 700px;
+}
+
+/* 진행률 바 */
+.quiz-progress {
+    width: 100%;
+}
+
+.quiz-progress .progress {
+    height: 25px;
+    border-radius: 15px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.quiz-progress .progress-bar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-weight: 700;
+}
+
+/* 질문 박스 */
+.quiz-question-box {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 5px solid #667eea;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-question {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 답변 선택지 */
+.quiz-answers {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.quiz-answer-btn {
+    background: white;
+    border: 3px solid #dee2e6;
+    border-radius: 15px;
+    padding: 20px 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #495057;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.quiz-answer-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.quiz-answer-btn:active {
+    transform: translateX(10px) scale(0.98);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .quiz-question {
+        font-size: 1.1rem;
+    }
+
+    .quiz-answer-btn {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+
+    .btn-quiz {
+        font-size: 1rem;
+        padding: 10px 20px;
     }
 }

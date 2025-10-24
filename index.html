@@ -124,6 +124,12 @@
         </p>
         <p class="text-center text-muted">모르시면 <a href="https://www.16personalities.com/ko" target="_blank">여기서 테스트</a></p>
 
+        <div class="text-center mt-3 mb-3">
+            <button type="button" class="btn btn-warning btn-quiz" onclick='startQuiz();'>
+                ⚡ 1분 퀴즈로 빠르게 알아보기
+            </button>
+        </div>
+
         <div class="mbti-grid mt-4">
             <button class="mbti-btn" onclick="selectMBTI('ISTJ')">
                 <img src="ISTJ.jpg" alt="ISTJ">
@@ -203,6 +209,34 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
+    </article>
+
+    <!-- MBTI 퀴즈 -->
+    <article class="quiz-screen">
+        <h2 class="mt-5 text-center">⚡ 1분 MBTI 퀴즈</h2>
+        <p class="text-center mt-3">
+            <span class="badge badge-info badge-lg"><span id="selected-person-quiz"></span></span>
+        </p>
+
+        <!-- 진행률 표시 -->
+        <div class="quiz-progress mt-4 mb-4">
+            <div class="progress">
+                <div id="quiz-progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+            </div>
+            <p class="text-center mt-2 text-muted"><span id="quiz-progress-text">1 / 8</span></p>
+        </div>
+
+        <!-- 질문 -->
+        <div class="quiz-question-box mt-4">
+            <h4 id="quiz-question" class="quiz-question"></h4>
+        </div>
+
+        <!-- 답변 선택지 -->
+        <div id="quiz-answers" class="quiz-answers mt-4">
+            <!-- JavaScript로 동적 생성 -->
+        </div>
+
+        <button type="button" class="btn btn-secondary mt-4" onclick='goBackToMBTIFromQuiz();'>뒤로 가기</button>
     </article>
 
     <!-- 문구 선택 -->
@@ -334,6 +368,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <script src="data.js"></script>
+    <script src="quiz.js"></script>
     <script>
         let personLabel = '';  // 표시할 레이블 (예: "내 여자친구")
         let gender = '';       // 내부 처리용 성별
