@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
-    formats: ['image/webp'],
-    remotePatterns: [],
+    unoptimized: true,
   },
+  basePath: process.env.GITHUB_PAGES ? '/mbtitest' : '',
   experimental: {},
 };
 
