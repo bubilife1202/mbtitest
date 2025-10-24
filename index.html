@@ -151,67 +151,67 @@
 
         <div class="mbti-grid mt-4">
             <button class="mbti-btn" onclick="selectMBTI('ISTJ')">
-                <img src="ISTJ.jpg" alt="ISTJ">
+                <img src="ISTJ.jpg" alt="ISTJ" loading="lazy">
                 <span>ISTJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ISFJ')">
-                <img src="ISFJ.jpg" alt="ISFJ">
+                <img src="ISFJ.jpg" alt="ISFJ" loading="lazy">
                 <span>ISFJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('INFJ')">
-                <img src="INFJ.jpg" alt="INFJ">
+                <img src="INFJ.jpg" alt="INFJ" loading="lazy">
                 <span>INFJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('INTJ')">
-                <img src="INTJ.jpg" alt="INTJ">
+                <img src="INTJ.jpg" alt="INTJ" loading="lazy">
                 <span>INTJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ISTP')">
-                <img src="ISTP.jpg" alt="ISTP">
+                <img src="ISTP.jpg" alt="ISTP" loading="lazy">
                 <span>ISTP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ISFP')">
-                <img src="ISFP.jpg" alt="ISFP">
+                <img src="ISFP.jpg" alt="ISFP" loading="lazy">
                 <span>ISFP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('INFP')">
-                <img src="INFP.jpg" alt="INFP">
+                <img src="INFP.jpg" alt="INFP" loading="lazy">
                 <span>INFP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('INTP')">
-                <img src="INTP.jpg" alt="INTP">
+                <img src="INTP.jpg" alt="INTP" loading="lazy">
                 <span>INTP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ESTP')">
-                <img src="ESTP.jpg" alt="ESTP">
+                <img src="ESTP.jpg" alt="ESTP" loading="lazy">
                 <span>ESTP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ESFP')">
-                <img src="ESFP.jpg" alt="ESFP">
+                <img src="ESFP.jpg" alt="ESFP" loading="lazy">
                 <span>ESFP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ENFP')">
-                <img src="ENFP.jpg" alt="ENFP">
+                <img src="ENFP.jpg" alt="ENFP" loading="lazy">
                 <span>ENFP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ENTP')">
-                <img src="ENTP.jpg" alt="ENTP">
+                <img src="ENTP.jpg" alt="ENTP" loading="lazy">
                 <span>ENTP</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ESTJ')">
-                <img src="ESTJ.jpg" alt="ESTJ">
+                <img src="ESTJ.jpg" alt="ESTJ" loading="lazy">
                 <span>ESTJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ESFJ')">
-                <img src="ESFJ.jpg" alt="ESFJ">
+                <img src="ESFJ.jpg" alt="ESFJ" loading="lazy">
                 <span>ESFJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ENFJ')">
-                <img src="ENFJ.jpg" alt="ENFJ">
+                <img src="ENFJ.jpg" alt="ENFJ" loading="lazy">
                 <span>ENFJ</span>
             </button>
             <button class="mbti-btn" onclick="selectMBTI('ENTJ')">
-                <img src="ENTJ.jpg" alt="ENTJ">
+                <img src="ENTJ.jpg" alt="ENTJ" loading="lazy">
                 <span>ENTJ</span>
             </button>
         </div>
@@ -642,6 +642,70 @@
         let phrase = '';
         let currentFeature = ''; // 현재 선택한 기능
 
+        // ========== localStorage 히스토리 관리 ==========
+        function saveToHistory(type, data) {
+            try {
+                const history = JSON.parse(localStorage.getItem('mbti_history') || '[]');
+                const entry = {
+                    type: type,
+                    data: data,
+                    timestamp: new Date().toISOString()
+                };
+                history.unshift(entry); // 최신 항목을 앞에 추가
+                // 최대 10개까지만 저장
+                if (history.length > 10) history.pop();
+                localStorage.setItem('mbti_history', JSON.stringify(history));
+            } catch (e) {
+                console.error('localStorage 저장 실패:', e);
+            }
+        }
+
+        // ========== URL 파라미터 관리 ==========
+        function buildShareURL(params) {
+            const url = new URL(window.location.href.split('?')[0]);
+            Object.keys(params).forEach(key => {
+                if (params[key]) url.searchParams.set(key, params[key]);
+            });
+            return url.toString();
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const feature = params.get('feature');
+
+            if (feature === 'translator' && params.get('mbti') && params.get('phrase') && params.get('gender')) {
+                // URL에서 결과 자동 로드
+                currentFeature = 'translator';
+                mbti = params.get('mbti');
+                phrase = decodeURIComponent(params.get('phrase'));
+                gender = params.get('gender');
+                personLabel = params.get('person') || '상대방';
+
+                // 결과 화면 바로 표시
+                setTimeout(() => {
+                    showResults();
+                }, 100);
+                return true;
+            }
+            return false;
+        }
+
+        // ========== 동적 OG 태그 업데이트 ==========
+        function updateMetaTags(title, description) {
+            // OG 태그 업데이트 (동적으로 공유 미리보기 변경)
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+
+            if (ogTitle) ogTitle.setAttribute('content', title);
+            if (ogDesc) ogDesc.setAttribute('content', description);
+
+            // 일반 meta 태그도 업데이트
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', description);
+
+            document.title = title;
+        }
+
         // 각 기능 진입 함수들
         function startTranslator() {
             currentFeature = 'translator';
@@ -758,6 +822,20 @@
             });
             $("#dont-list").html(dontHTML);
 
+            // ========== localStorage에 저장 ==========
+            saveToHistory('translator', {
+                personLabel: personLabel,
+                gender: gender,
+                mbti: mbti,
+                phrase: phrase,
+                meaning: data.meaning
+            });
+
+            // ========== 동적 OG 태그 업데이트 ==========
+            const metaTitle = `${personLabel}(${mbti})가 "${phrase}"라고 할 때 진짜 의미`;
+            const metaDesc = `💡 진짜 의미: ${data.meaning.substring(0, 100)}... | MBTI별 완벽한 대처법`;
+            updateMetaTags(metaTitle, metaDesc);
+
             $(".phrase-selector").hide();
             $(".result").show();
             window.scrollTo(0, 0);
@@ -775,17 +853,40 @@
         }
 
         function shareResult() {
-            const text = `${personLabel}(${mbti})가 "${phrase}"라고 할 때 진짜 의미!\n\n💡 ${phraseData[phrase][gender][mbti].meaning}\n\n당신도 확인해보세요!\nhttps://mbtiexplain.netlify.app`;
+            // ========== URL 기반 공유로 개선 ==========
+            const shareURL = buildShareURL({
+                feature: 'translator',
+                mbti: mbti,
+                phrase: phrase,
+                gender: gender,
+                person: personLabel
+            });
+
+            const text = `${personLabel}(${mbti})가 "${phrase}"라고 할 때 진짜 의미!\n\n💡 ${phraseData[phrase][gender][mbti].meaning}\n\n당신도 확인해보세요!\n${shareURL}`;
 
             if (navigator.share) {
                 navigator.share({
                     title: '상대방의 말, 진짜 의미는?',
-                    text: text
+                    text: text,
+                    url: shareURL
                 });
             } else {
-                alert('공유할 내용:\n\n' + text);
+                // 클립보드에 복사
+                navigator.clipboard.writeText(shareURL).then(() => {
+                    alert('링크가 복사되었습니다!\n\n' + shareURL + '\n\n친구에게 공유하세요!');
+                }).catch(() => {
+                    alert('공유 링크:\n\n' + shareURL);
+                });
             }
         }
+
+        // ========== 페이지 로드 시 URL 파라미터 확인 ==========
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!loadFromURL()) {
+                // URL에서 로드 안됐으면 시작 화면 표시
+                $(".start").show();
+            }
+        });
     </script>
 
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ffd42a25cb08056"></script>
