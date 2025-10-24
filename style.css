@@ -68,6 +68,11 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
 }
 
 .feature-card:hover {
@@ -87,6 +92,8 @@ body {
     font-weight: 700;
     color: #6a1b9a;
     margin-bottom: 10px;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 .feature-desc {
@@ -94,6 +101,8 @@ body {
     color: #666;
     margin: 0;
     line-height: 1.4;
+    word-break: keep-all;
+    white-space: nowrap;
 }
 
 /* 모바일 반응형 */
@@ -105,6 +114,7 @@ body {
 
     .feature-card {
         padding: 20px 15px;
+        min-height: 180px;
     }
 
     .feature-icon {
@@ -121,6 +131,31 @@ body {
 
     .start h1 {
         font-size: 2rem;
+    }
+}
+
+/* 아주 작은 화면 대응 */
+@media (max-width: 480px) {
+    .feature-grid {
+        gap: 12px;
+    }
+
+    .feature-card {
+        padding: 18px 12px;
+        min-height: 160px;
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .feature-title {
+        font-size: 1rem;
+    }
+
+    .feature-desc {
+        font-size: 0.8rem;
     }
 }
 
