@@ -28,7 +28,12 @@ body {
 .phrase-selector,
 .result,
 .simulator-screen,
-.simulator-result {
+.simulator-result,
+.gift-occasion-selector,
+.gift-result,
+.date-result,
+.compatibility-selector,
+.compatibility-result {
     display: none;
 }
 
@@ -1003,5 +1008,422 @@ body {
 
     .grade-score {
         font-size: 1.2rem;
+    }
+}
+
+/* ========== 선물 추천 ========== */
+
+/* 상황 선택 그리드 */
+.occasion-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.occasion-card {
+    background: white;
+    border: 3px solid #ffc107;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+.occasion-card:hover {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    border-color: #ff9800;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+}
+
+.occasion-card:hover .occasion-icon,
+.occasion-card:hover .occasion-text {
+    color: white;
+}
+
+.occasion-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.occasion-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f57c00;
+}
+
+/* 선물 결과 */
+.gift-section {
+    margin-bottom: 30px;
+}
+
+.gift-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.gift-list-box {
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.recommended-box {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 4px solid #28a745;
+}
+
+.avoid-box {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 4px solid #dc3545;
+}
+
+.gift-list-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gift-list-box li {
+    font-size: 1.2rem;
+    padding: 12px 0;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+.recommended-box li {
+    color: #155724;
+}
+
+.avoid-box li {
+    color: #721c24;
+}
+
+.gift-list-box li:last-child {
+    border-bottom: none;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .occasion-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .occasion-icon {
+        font-size: 3rem;
+    }
+
+    .occasion-text {
+        font-size: 1.1rem;
+    }
+
+    .gift-list-box li {
+        font-size: 1rem;
+    }
+}
+
+/* ========== 데이트 코스 추천 ========== */
+
+/* 섹션 타이틀 */
+.date-section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #6a1b9a;
+}
+
+/* 데이트 코스 카드 */
+.date-course-card {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    border: 4px solid #9c27b0;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 20px rgba(156, 39, 176, 0.3);
+    transition: all 0.3s ease;
+}
+
+.date-course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(156, 39, 176, 0.4);
+}
+
+.date-course-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6a1b9a;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 데이트 단계 */
+.date-course-steps {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.date-step {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 2px dashed rgba(156, 39, 176, 0.2);
+}
+
+.date-step:last-child {
+    border-bottom: none;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 데이트 팁 */
+.tips-box {
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 20px;
+}
+
+.do-tips {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border: 4px solid #28a745;
+}
+
+.dont-tips {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border: 4px solid #dc3545;
+}
+
+.tips-box h4 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.do-tips h4 {
+    color: #155724;
+}
+
+.dont-tips h4 {
+    color: #721c24;
+}
+
+.tips-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-box li {
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 10px 0;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+}
+
+.do-tips li {
+    color: #155724;
+}
+
+.dont-tips li {
+    color: #721c24;
+}
+
+.tips-box li:last-child {
+    border-bottom: none;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .date-course-title {
+        font-size: 1.2rem;
+    }
+
+    .step-number {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+
+    .step-text {
+        font-size: 1rem;
+    }
+
+    .tips-box li {
+        font-size: 1rem;
+    }
+}
+
+/* ========== MBTI 궁합 테스트 ========== */
+
+/* 작은 MBTI 버튼 */
+.mbti-btn-small {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 3px solid #5a67d8;
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.mbti-btn-small:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* 궁합 점수 박스 */
+.compat-grade-box {
+    background: linear-gradient(135deg, #fff0f6 0%, #ffe0f0 100%);
+    border: 5px solid #ff69b4;
+    border-radius: 25px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+}
+
+.compat-emoji {
+    font-size: 7rem;
+    margin-bottom: 20px;
+}
+
+.compat-grade-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #c2185b;
+    margin-bottom: 15px;
+}
+
+.compat-rating {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ff4081;
+    margin-bottom: 15px;
+}
+
+.compat-description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 궁합 섹션 */
+.compat-section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #c2185b;
+}
+
+.compat-list-box {
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.pros-box {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 4px solid #4caf50;
+}
+
+.cons-box {
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    border: 4px solid #ff9800;
+}
+
+.tips-box {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border: 4px solid #2196f3;
+}
+
+.compat-list-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.compat-list-box li {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 15px 0;
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+.pros-box li {
+    color: #2e7d32;
+}
+
+.cons-box li {
+    color: #e65100;
+}
+
+.tips-box li {
+    color: #1565c0;
+}
+
+.compat-list-box li:last-child {
+    border-bottom: none;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    .compat-emoji {
+        font-size: 5rem;
+    }
+
+    .compat-grade-title {
+        font-size: 1.8rem;
+    }
+
+    .compat-rating {
+        font-size: 1.2rem;
+    }
+
+    .compat-description {
+        font-size: 1rem;
+    }
+
+    .compat-list-box li {
+        font-size: 1rem;
+    }
+
+    .mbti-btn-small {
+        padding: 12px;
+        font-size: 1rem;
     }
 }

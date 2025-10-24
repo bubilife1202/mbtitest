@@ -292,9 +292,218 @@
                 🎮 갈등 상황 시뮬레이터 체험하기
             </button>
             <p class="text-muted mt-2 small">실제 상황에서 어떻게 대처할지 연습해보세요!</p>
+
+            <button type="button" class="btn btn-warning btn-lg mt-2" onclick='startGiftRecommendation();'>
+                💝 MBTI별 선물 추천 받기
+            </button>
+            <p class="text-muted mt-2 small">생일, 기념일, 사과할 때 완벽한 선물!</p>
+
+            <button type="button" class="btn btn-success btn-lg mt-2" onclick='startDateRecommendation();'>
+                💑 완벽한 데이트 코스 추천
+            </button>
+            <p class="text-muted mt-2 small">MBTI별 맞춤 데이트 코스 3가지!</p>
+
+            <button type="button" class="btn btn-danger btn-lg mt-2" onclick='startCompatibilityTest();'>
+                💕 우리 MBTI 궁합은?
+            </button>
+            <p class="text-muted mt-2 small">커플 궁합 점수와 관계 팁!</p>
         </div>
 
         <button type="button" class="btn btn-secondary mt-4" onclick='goBackToMBTI();'>MBTI 다시 선택</button>
+    </article>
+
+    <!-- MBTI 궁합 테스트 - 내 MBTI 선택 -->
+    <article class="compatibility-selector">
+        <h2 class="mt-5 text-center">💕 당신의 MBTI는?</h2>
+        <p class="text-center mt-3">
+            <span class="badge badge-info badge-lg">
+                <span id="compat-partner-label"></span>
+                (<span id="compat-partner-mbti"></span>)
+            </span>
+        </p>
+        <p class="text-center text-muted mt-2">당신의 MBTI를 선택하면 궁합을 알려드려요!</p>
+
+        <div class="mbti-grid mt-4">
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ISTJ')">ISTJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ISFJ')">ISFJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('INFJ')">INFJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('INTJ')">INTJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ISTP')">ISTP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ISFP')">ISFP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('INFP')">INFP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('INTP')">INTP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ESTP')">ESTP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ESFP')">ESFP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ENFP')">ENFP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ENTP')">ENTP</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ESTJ')">ESTJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ESFJ')">ESFJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ENFJ')">ENFJ</button>
+            <button class="mbti-btn-small" onclick="selectMyMBTI('ENTJ')">ENTJ</button>
+        </div>
+
+        <button type="button" class="btn btn-secondary mt-4" onclick='backToPhrasesFromCompat();'>뒤로 가기</button>
+    </article>
+
+    <!-- MBTI 궁합 결과 -->
+    <article class="compatibility-result">
+        <div class="result-header mt-4">
+            <h2 class="text-center">💕 MBTI 궁합 결과</h2>
+            <p class="text-center mt-3">
+                <span class="badge badge-primary badge-lg">
+                    <span id="compat-my-mbti"></span>
+                </span>
+                ♥
+                <span class="badge badge-info badge-lg">
+                    <span id="compat-partner-mbti-result"></span>
+                </span>
+            </p>
+            <p class="text-center text-muted">
+                나 × <span id="compat-partner-name"></span>
+            </p>
+        </div>
+
+        <div class="compat-grade-box mt-4">
+            <div class="compat-emoji" id="compat-emoji"></div>
+            <h3 id="compat-grade" class="compat-grade-title"></h3>
+            <p id="compat-rating" class="compat-rating"></p>
+            <p id="compat-description" class="compat-description"></p>
+        </div>
+
+        <div class="compat-section mt-4">
+            <h3 class="compat-section-title">💚 우리 관계의 장점</h3>
+            <div class="compat-list-box pros-box">
+                <ul id="compat-pros"></ul>
+            </div>
+        </div>
+
+        <div class="compat-section mt-4">
+            <h3 class="compat-section-title">⚠️ 주의할 점</h3>
+            <div class="compat-list-box cons-box">
+                <ul id="compat-cons"></ul>
+            </div>
+        </div>
+
+        <div class="compat-section mt-4">
+            <h3 class="compat-section-title">💡 관계 꿀팁</h3>
+            <div class="compat-list-box tips-box">
+                <ul id="compat-tips"></ul>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center action-buttons">
+            <button type="button" class="btn btn-primary" onclick='restartFromCompat();'>🔄 처음으로</button>
+            <button type="button" class="btn btn-secondary" onclick='backToPhrasesFromCompat();'>← 다른 기능 보기</button>
+        </div>
+    </article>
+
+    <!-- 선물 추천 - 상황 선택 -->
+    <article class="gift-occasion-selector">
+        <h2 class="mt-5 text-center">💝 어떤 상황인가요?</h2>
+        <p class="text-center mt-3">
+            <span class="badge badge-info badge-lg">
+                <span id="gift-person"></span>
+                (<span id="gift-mbti"></span>)
+            </span>
+        </p>
+
+        <div class="occasion-grid mt-4">
+            <div class="occasion-card" onclick="selectGiftOccasion('생일')">
+                <div class="occasion-icon">🎂</div>
+                <div class="occasion-text">생일</div>
+            </div>
+            <div class="occasion-card" onclick="selectGiftOccasion('기념일')">
+                <div class="occasion-icon">💍</div>
+                <div class="occasion-text">기념일</div>
+            </div>
+            <div class="occasion-card" onclick="selectGiftOccasion('사과')">
+                <div class="occasion-icon">🙏</div>
+                <div class="occasion-text">사과할 때</div>
+            </div>
+            <div class="occasion-card" onclick="selectGiftOccasion('깜짝선물')">
+                <div class="occasion-icon">🎁</div>
+                <div class="occasion-text">깜짝 선물</div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary mt-4" onclick='backToPhrasesFromGift();'>뒤로 가기</button>
+    </article>
+
+    <!-- 선물 추천 결과 -->
+    <article class="gift-result">
+        <div class="result-header mt-4">
+            <h2 class="text-center">💝 완벽한 선물 추천</h2>
+            <p class="text-center mt-3">
+                <span class="badge badge-warning badge-lg">
+                    <span id="gift-occasion-title"></span> 선물
+                </span>
+                <br>
+                <span class="badge badge-info badge-lg mt-2">
+                    <span id="gift-person-label"></span>
+                    (<span id="gift-mbti-label"></span>)
+                </span>
+            </p>
+        </div>
+
+        <div class="gift-section mt-4">
+            <h3 class="gift-section-title">✅ 추천 선물</h3>
+            <div class="gift-list-box recommended-box">
+                <ul id="gift-recommended-list"></ul>
+            </div>
+        </div>
+
+        <div class="gift-section mt-4">
+            <h3 class="gift-section-title">❌ 피해야 할 선물</h3>
+            <div class="gift-list-box avoid-box">
+                <ul id="gift-avoid-list"></ul>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center action-buttons">
+            <button type="button" class="btn btn-primary" onclick='restartFromGift();'>🔄 처음으로</button>
+            <button type="button" class="btn btn-secondary" onclick='backToPhrasesFromGift();'>← 다른 기능 보기</button>
+        </div>
+    </article>
+
+    <!-- 데이트 코스 추천 결과 -->
+    <article class="date-result">
+        <div class="result-header mt-4">
+            <h2 class="text-center">💑 완벽한 데이트 코스</h2>
+            <p class="text-center mt-3">
+                <span class="badge badge-success badge-lg">
+                    <span id="date-person-label"></span>
+                    (<span id="date-mbti-label"></span>)
+                </span>
+            </p>
+        </div>
+
+        <div class="date-courses mt-4">
+            <h3 class="date-section-title">🌟 추천 데이트 코스</h3>
+            <div id="date-courses-list"></div>
+        </div>
+
+        <div class="date-tips mt-5">
+            <h3 class="date-section-title">💡 데이트 팁</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="tips-box do-tips">
+                        <h4>✅ 이렇게 하세요</h4>
+                        <ul id="date-tips-do"></ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="tips-box dont-tips">
+                        <h4>❌ 피하세요</h4>
+                        <ul id="date-tips-dont"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center action-buttons">
+            <button type="button" class="btn btn-primary" onclick='restartFromDate();'>🔄 처음으로</button>
+            <button type="button" class="btn btn-secondary" onclick='backToPhrasesFromDate();'>← 다른 기능 보기</button>
+        </div>
     </article>
 
     <!-- 결과화면 -->
@@ -419,7 +628,7 @@
 
     <!-- Version Info -->
     <div class="version-info text-center mt-3">
-        <small class="text-muted">v1.2.0 | 완전판 (256가지 모든 조합 완성)</small>
+        <small class="text-muted">v1.3.0 | 프리미엄 에디션 (퀴즈, 시뮬레이터, 선물, 데이트, 궁합 테스트)</small>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -428,6 +637,9 @@
     <script src="data.js"></script>
     <script src="quiz.js"></script>
     <script src="simulator.js"></script>
+    <script src="gift.js"></script>
+    <script src="date.js"></script>
+    <script src="compatibility.js"></script>
     <script>
         let personLabel = '';  // 표시할 레이블 (예: "내 여자친구")
         let gender = '';       // 내부 처리용 성별
