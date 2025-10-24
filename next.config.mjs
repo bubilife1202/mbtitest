@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.GITHUB_PAGES ? '/mbtitest' : '',
+  basePath: '/mbtitest',
   experimental: {},
 };
 
