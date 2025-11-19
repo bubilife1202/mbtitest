@@ -6,11 +6,23 @@ export const metadata: Metadata = {
   title: 'MBTI 관계 도우미 - 상대방의 말, 진짜 의미는?',
   description: 'MBTI별 속마음 해석, 선물 추천, 데이트 코스, 궁합 테스트 등 완벽한 관계 가이드',
   keywords: 'MBTI, 관계, 연애, 속마음, 번역, 궁합, 선물추천, 데이트',
+  metadataBase: new URL('https://mbtiexplain.nomadlab.kr'),
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: '🚨 여자친구가 괜찮아 할 때 진짜 의미는?',
     description: 'ISTJ: 정말 괜찮음 ✅ vs INFP: 엄청 화남 💥 | MBTI별 진짜 속마음 256가지',
     type: 'website',
     locale: 'ko_KR',
+    url: 'https://mbtiexplain.nomadlab.kr',
+    siteName: 'MBTI 관계 도우미',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '🚨 여자친구가 괜찮아 할 때 진짜 의미는?',
+    description: 'ISTJ: 정말 괜찮음 ✅ vs INFP: 엄청 화남 💥 | MBTI별 진짜 속마음 256가지',
   },
 };
 
