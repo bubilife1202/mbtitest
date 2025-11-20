@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MBTIType } from '@/types';
 import { getAngryData } from '@/data/angry';
-import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard } from '@/components/ui';
+import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard, SurvivalMeter, CriticalWarning, CopyButton } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
 
@@ -139,6 +139,9 @@ export default function AngryPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
+            {/* 🚨 생존 확률 미터기 (최상단) */}
+            <SurvivalMeter percentage={5} className="mb-8" />
+
             <ResultCard
               title={`${selectedMBTI} ${gender === 'male' ? '남자' : '여자'}가 킹받았을 때`}
               mbti={selectedMBTI}
@@ -220,24 +223,26 @@ export default function AngryPage() {
                 </p>
               </div>
 
+              {/* 💀 금지어 경고 (절대 하지 말 것) */}
+              <CriticalWarning
+                title="💀 절대 금지! (이거 하면 끝장남 ㅋㅋ)"
+                warnings={[result.avoid]}
+              />
+
               {/* 해결 방법 */}
               <div className="bg-green-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-green-500/50">
                 <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
                   ✅ 달래는 법 (이거 하면 100% 풀림!)
                 </h3>
-                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
+                <p className="text-white text-lg leading-relaxed whitespace-pre-line mb-6">
                   {result.solution}
                 </p>
-              </div>
 
-              {/* 절대 하지 말 것 */}
-              <div className="bg-orange-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-orange-500/50">
-                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
-                  ⛔ 절대 금지! (이거 하면 끝장남 ㅋㅋ)
-                </h3>
-                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
-                  {result.avoid}
-                </p>
+                {/* 📋 복붙용 대본 버튼 */}
+                <CopyButton
+                  text={result.solution}
+                  label="📋 달래는 대본 복사하기"
+                />
               </div>
 
               {/* 광고 */}

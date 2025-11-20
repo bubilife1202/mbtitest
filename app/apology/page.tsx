@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MBTIType } from '@/types';
 import { getApologyData } from '@/data/apology';
-import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard } from '@/components/ui';
+import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard, SurvivalMeter, CriticalWarning, CopyButton } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
 
@@ -139,6 +139,9 @@ export default function ApologyPage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
+            {/* 🚨 생존 확률 미터기 (최상단) */}
+            <SurvivalMeter percentage={10} className="mb-8" />
+
             <ResultCard
               title={`${selectedMBTI} ${gender === 'male' ? '남자' : '여자'} 사과받는 법`}
               mbti={selectedMBTI}
@@ -177,6 +180,12 @@ export default function ApologyPage() {
                 </p>
               </div>
 
+              {/* 💀 금지어 경고 (피해야 할 행동) */}
+              <CriticalWarning
+                title="💀 이거 하면 더 화남 ㅋㅋ (절대 금지!)"
+                warnings={[result.avoid]}
+              />
+
               {/* 원하는 사과 방식 */}
               <div className="bg-green-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-green-500/50">
                 <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
@@ -187,26 +196,22 @@ export default function ApologyPage() {
                 </p>
               </div>
 
-              {/* 피해야 할 행동 */}
-              <div className="bg-orange-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-orange-500/50">
-                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
-                  ⚠️ 이거 하면 더 화남 ㅋㅋ (절대 금지!)
-                </h3>
-                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
-                  {result.avoid}
-                </p>
-              </div>
-
               {/* 사과 예시 */}
               <div className="bg-purple-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-purple-500/50">
                 <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
                   💬 사과 예시 (이대로 따라해봐!)
                 </h3>
-                <div className="bg-black/30 rounded-2xl p-6">
+                <div className="bg-black/30 rounded-2xl p-6 mb-6">
                   <p className="text-white text-lg leading-relaxed whitespace-pre-line italic">
                     {result.example}
                   </p>
                 </div>
+
+                {/* 📋 복붙용 대본 버튼 */}
+                <CopyButton
+                  text={result.example}
+                  label="📋 사과 대본 복사하기"
+                />
               </div>
 
               {/* 광고 */}

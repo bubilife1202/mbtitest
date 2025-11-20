@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ===== 1. FeatureCard: 게임 로비 스타일 카드 =====
@@ -369,6 +369,254 @@ export function ShareButton({ onClick, icon, label, gradient = 'from-purple-500 
     >
       <span className="text-2xl">{icon}</span>
       <span>{label}</span>
+    </motion.button>
+  );
+}
+
+// ===== 9. SurvivalMeter: 생존 확률 게이지 (위기 상황용) =====
+interface SurvivalMeterProps {
+  percentage: number;
+  className?: string;
+}
+
+export function SurvivalMeter({ percentage, className = '' }: SurvivalMeterProps) {
+  const getColor = () => {
+    if (percentage < 20) return 'from-red-600 to-red-500';
+    if (percentage < 50) return 'from-orange-600 to-orange-500';
+    if (percentage < 80) return 'from-yellow-600 to-yellow-500';
+    return 'from-green-600 to-green-500';
+  };
+
+  const getMessage = () => {
+    if (percentage < 20) return '🚨 초비상! 즉시 조치 필요!';
+    if (percentage < 50) return '⚠️ 위험! 신중하게 행동하세요';
+    if (percentage < 80) return '💛 주의! 조심스럽게 접근';
+    return '✅ 안전! 좋은 상태입니다';
+  };
+
+  return (
+    <motion.div
+      className={`bg-black/40 backdrop-blur-md rounded-3xl p-6 border-4 ${
+        percentage < 20 ? 'border-red-500 shadow-[0_0_30px_rgba(239,68,68,0.6)]' :
+        percentage < 50 ? 'border-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.6)]' :
+        percentage < 80 ? 'border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.6)]' :
+        'border-green-500 shadow-[0_0_30px_rgba(34,197,94,0.6)]'
+      } ${className}`}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        y: percentage < 20 ? [0, -5, 0] : 0
+      }}
+      transition={{
+        duration: 0.5,
+        y: { repeat: percentage < 20 ? Infinity : 0, duration: 0.8 }
+      }}
+    >
+      <div className="text-center mb-4">
+        <motion.h3
+          className="text-2xl font-black text-white mb-2"
+          animate={percentage < 20 ? { scale: [1, 1.1, 1] } : {}}
+          transition={{ repeat: Infinity, duration: 1 }}
+        >
+          {getMessage()}
+        </motion.h3>
+        <motion.div
+          className="text-6xl font-black"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', bounce: 0.5 }}
+        >
+          <span className={`bg-gradient-to-r ${getColor()} bg-clip-text text-transparent`}>
+            {percentage}%
+          </span>
+        </motion.div>
+        <p className="text-sm text-white/70 mt-2">생존 확률</p>
+      </div>
+
+      {/* 게이지 바 */}
+      <div className="relative h-8 bg-gray-800 rounded-full overflow-hidden border-2 border-white/20">
+        <motion.div
+          className={`absolute top-0 left-0 h-full bg-gradient-to-r ${getColor()}`}
+          initial={{ width: 0 }}
+          animate={{ width: `${percentage}%` }}
+          transition={{ duration: 1.5, ease: 'easeOut', delay: 0.3 }}
+        />
+
+        {/* 깜빡이는 효과 (낮은 확률일 때) */}
+        {percentage < 20 && (
+          <motion.div
+            className="absolute inset-0 bg-red-500/30"
+            animate={{ opacity: [0, 0.5, 0] }}
+            transition={{ repeat: Infinity, duration: 0.8 }}
+          />
+        )}
+
+        {/* 반짝이는 효과 */}
+        <motion.div
+          className="absolute top-0 left-0 h-full w-20 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+          animate={{ x: [-80, `calc(${percentage}% + 80px)`] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear', delay: 1 }}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
+// ===== 10. CriticalWarning: 금지어 경고 박스 =====
+interface CriticalWarningProps {
+  title?: string;
+  warnings: string[];
+  className?: string;
+}
+
+export function CriticalWarning({
+  title = "⚠️ 절대 금지! (이거 하면 관계 끝)",
+  warnings,
+  className = ''
+}: CriticalWarningProps) {
+  return (
+    <motion.div
+      className={`bg-gradient-to-br from-red-600/30 to-orange-600/30 backdrop-blur-md rounded-3xl p-6 border-4 border-red-500 shadow-[0_0_40px_rgba(239,68,68,0.5)] ${className}`}
+      initial={{ opacity: 0, x: -50 }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        scale: [1, 1.02, 1]
+      }}
+      transition={{
+        duration: 0.5,
+        scale: { repeat: Infinity, duration: 2, repeatDelay: 1 }
+      }}
+    >
+      {/* 해골 아이콘 + 타이틀 */}
+      <div className="flex items-center gap-3 mb-4">
+        <motion.span
+          className="text-5xl"
+          animate={{ rotate: [-5, 5, -5] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          💀
+        </motion.span>
+        <h3 className="text-2xl font-black text-red-200 flex-1">
+          {title}
+        </h3>
+        <motion.span
+          className="text-5xl"
+          animate={{ rotate: [5, -5, 5] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+        >
+          💀
+        </motion.span>
+      </div>
+
+      {/* 경고 메시지들 */}
+      <div className="space-y-3">
+        {warnings.map((warning, idx) => (
+          <motion.div
+            key={idx}
+            className="bg-black/40 rounded-2xl p-4 border-2 border-red-400/50"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 * idx }}
+          >
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">⛔</span>
+              <p className="text-white text-lg leading-relaxed flex-1">
+                {warning}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* 하단 경고문 */}
+      <motion.div
+        className="mt-4 text-center text-red-200 font-bold text-sm"
+        animate={{ opacity: [1, 0.5, 1] }}
+        transition={{ repeat: Infinity, duration: 1.5 }}
+      >
+        🚨 위 행동 시 생존 확률 0% 🚨
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ===== 11. CopyButton: 복사 버튼 (복붙용 대본) =====
+interface CopyButtonProps {
+  text: string;
+  label?: string;
+  onCopy?: () => void;
+  className?: string;
+}
+
+export function CopyButton({
+  text,
+  label = "📋 카톡에 바로 복붙하기",
+  onCopy,
+  className = ''
+}: CopyButtonProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      onCopy?.();
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('복사 실패:', err);
+    }
+  };
+
+  return (
+    <motion.button
+      onClick={handleCopy}
+      className={`relative overflow-hidden w-full px-8 py-6 rounded-2xl font-black text-xl
+        ${copied
+          ? 'bg-gradient-to-r from-green-500 to-emerald-500'
+          : 'bg-gradient-to-r from-blue-600 to-purple-600'
+        }
+        text-white shadow-2xl border-4 border-white/30
+        ${className}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      disabled={copied}
+    >
+      <AnimatePresence mode="wait">
+        {copied ? (
+          <motion.div
+            key="copied"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            className="flex items-center justify-center gap-2"
+          >
+            <span className="text-3xl">✅</span>
+            <span>복사 완료! 이제 바로 보내세요!</span>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="copy"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            className="flex items-center justify-center gap-2"
+          >
+            <span className="text-3xl">📋</span>
+            <span>{label}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 반짝이는 효과 */}
+      {!copied && (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+          animate={{ x: ['-100%', '200%'] }}
+          transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+        />
+      )}
     </motion.button>
   );
 }

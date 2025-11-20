@@ -14,6 +14,15 @@ export default function BalancePage() {
   const [scores, setScores] = useState({ E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 });
   const [isComplete, setIsComplete] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
+  const [selectedChoice, setSelectedChoice] = useState<'A' | 'B' | null>(null);
+  const [showStats, setShowStats] = useState(false);
+
+  // 더미 통계 데이터 (실제로는 백엔드에서 가져와야 함)
+  const getRandomStats = () => {
+    const percentA = Math.floor(Math.random() * 40) + 30; // 30-70%
+    return { A: percentA, B: 100 - percentA };
+  };
+  const [stats, setStats] = useState(getRandomStats());
 
   const handleStart = () => {
     setIsStarted(true);
@@ -29,12 +38,20 @@ export default function BalancePage() {
     });
 
     setScores(newScores);
+    setSelectedChoice(choice);
+    setShowStats(true);
 
-    if (currentQuestion < balanceQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setIsComplete(true);
-    }
+    // 1초 후 자동으로 다음 문제로 이동 (틱톡 스타일)
+    setTimeout(() => {
+      if (currentQuestion < balanceQuestions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedChoice(null);
+        setShowStats(false);
+        setStats(getRandomStats()); // 새로운 통계 생성
+      } else {
+        setIsComplete(true);
+      }
+    }, 1200);
   };
 
   const handleReset = () => {
@@ -152,32 +169,90 @@ export default function BalancePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* 선택지 A */}
                   <motion.button
-                    onClick={() => handleChoice('A')}
-                    className="relative p-8 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-700 text-white font-black text-xl shadow-2xl overflow-hidden min-h-[200px] flex items-center justify-center border-4 border-blue-300/50"
-                    whileHover={{ scale: 1.05, rotate: -2 }}
-                    whileTap={{ scale: 0.95 }}
+                    onClick={() => !showStats && handleChoice('A')}
+                    disabled={showStats}
+                    className={`relative p-8 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-700 text-white font-black text-xl shadow-2xl overflow-hidden min-h-[200px] flex flex-col items-center justify-center border-4 ${
+                      selectedChoice === 'A' ? 'border-yellow-300 scale-105' : 'border-blue-300/50'
+                    }`}
+                    whileHover={!showStats ? { scale: 1.05, rotate: -2 } : {}}
+                    whileTap={!showStats ? { scale: 0.95 } : {}}
                   >
                     {/* 배경 효과 */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                    {!showStats && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                    )}
 
-                    <span className="relative z-10 whitespace-pre-line text-center leading-relaxed">
+                    <span className="relative z-10 whitespace-pre-line text-center leading-relaxed mb-4">
                       {balanceQuestions[currentQuestion].optionA}
                     </span>
+
+                    {/* 통계 표시 */}
+                    {showStats && (
+                      <motion.div
+                        className="w-full mt-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        <div className="bg-black/30 rounded-xl p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm">다른 사람들의 선택</span>
+                            <span className="text-2xl font-black text-yellow-300">{stats.A}%</span>
+                          </div>
+                          <div className="relative h-4 bg-gray-800 rounded-full overflow-hidden">
+                            <motion.div
+                              className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-400 to-yellow-300"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${stats.A}%` }}
+                              transition={{ duration: 0.8, ease: 'easeOut' }}
+                            />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
                   </motion.button>
 
                   {/* 선택지 B */}
                   <motion.button
-                    onClick={() => handleChoice('B')}
-                    className="relative p-8 rounded-3xl bg-gradient-to-br from-purple-500 to-purple-700 text-white font-black text-xl shadow-2xl overflow-hidden min-h-[200px] flex items-center justify-center border-4 border-purple-300/50"
-                    whileHover={{ scale: 1.05, rotate: 2 }}
-                    whileTap={{ scale: 0.95 }}
+                    onClick={() => !showStats && handleChoice('B')}
+                    disabled={showStats}
+                    className={`relative p-8 rounded-3xl bg-gradient-to-br from-purple-500 to-purple-700 text-white font-black text-xl shadow-2xl overflow-hidden min-h-[200px] flex flex-col items-center justify-center border-4 ${
+                      selectedChoice === 'B' ? 'border-yellow-300 scale-105' : 'border-purple-300/50'
+                    }`}
+                    whileHover={!showStats ? { scale: 1.05, rotate: 2 } : {}}
+                    whileTap={!showStats ? { scale: 0.95 } : {}}
                   >
                     {/* 배경 효과 */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                    {!showStats && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
+                    )}
 
-                    <span className="relative z-10 whitespace-pre-line text-center leading-relaxed">
+                    <span className="relative z-10 whitespace-pre-line text-center leading-relaxed mb-4">
                       {balanceQuestions[currentQuestion].optionB}
                     </span>
+
+                    {/* 통계 표시 */}
+                    {showStats && (
+                      <motion.div
+                        className="w-full mt-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        <div className="bg-black/30 rounded-xl p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm">다른 사람들의 선택</span>
+                            <span className="text-2xl font-black text-yellow-300">{stats.B}%</span>
+                          </div>
+                          <div className="relative h-4 bg-gray-800 rounded-full overflow-hidden">
+                            <motion.div
+                              className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-400 to-yellow-300"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${stats.B}%` }}
+                              transition={{ duration: 0.8, ease: 'easeOut' }}
+                            />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
                   </motion.button>
                 </div>
 
@@ -232,6 +307,30 @@ export default function BalancePage() {
                   ))}
                 </div>
               </div>
+
+              {/* MBTI별 통계 */}
+              <motion.div
+                className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-cyan-500/50"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
+                  📈 {resultMBTI}의 특징적 선택
+                </h3>
+                <div className="bg-black/30 rounded-2xl p-6">
+                  <p className="text-white text-lg mb-4">
+                    🎯 <span className="font-black text-cyan-300">{resultMBTI}</span> 유형의 <span className="font-black text-yellow-300">87%</span>는 이런 선택을 했어요!
+                  </p>
+                  <div className="space-y-3 text-white/90">
+                    <p>✓ {result.traits[0]} - 역시 내 MBTI 답네!</p>
+                    <p>✓ {result.traits[1]} - 이게 나야 ㅋㅋ</p>
+                    <p className="text-sm text-cyan-300 mt-4">
+                      💬 같은 MBTI는 비슷한 패턴을 보이는 경향이 있어요
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
 
               {/* 세부 성향 */}
               <div className="bg-yellow-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-yellow-500/50">
