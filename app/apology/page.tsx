@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { MBTIType } from '@/types';
 import { getApologyData } from '@/data/apology';
-import { MBTIButton } from '@/components/ui';
+import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard } from '@/components/ui';
+import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
 
 export default function ApologyPage() {
@@ -39,101 +41,218 @@ export default function ApologyPage() {
   const result = data && gender ? data[gender] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <Link href="/" className="inline-block mb-8 text-purple-600 hover:text-purple-800">
-          ← 홈으로
+        {/* 뒤로가기 */}
+        <Link href="/">
+          <motion.div
+            className="inline-flex items-center gap-2 mb-8 text-white/80 hover:text-white transition-colors"
+            whileHover={{ x: -5 }}
+          >
+            <span className="text-2xl">←</span>
+            <span className="font-bold">홈으로</span>
+          </motion.div>
         </Link>
 
-        <h1 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-          💐 MBTI별 사과 받는 법
-        </h1>
-        <p className="text-center text-gray-600 mb-12">
-          상대방의 MBTI에 맞는 진심어린 사과 방법을 알아보세요
-        </p>
+        {/* 타이틀 */}
+        <AnimatedTitle className="mb-2">
+          💐 진심 전달 사과법
+        </AnimatedTitle>
 
-        <AdBanner />
+        <motion.p
+          className="text-center text-xl text-white/80 mb-8 font-semibold"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          {step === 1 && "MBTI별 진짜 먹히는 사과 방법 🙏"}
+          {step === 2 && "상대방의 MBTI를 선택해주세요 🎯"}
+          {step === 3 && "🔥 이 사과법이면 100% 용서받음!"}
+        </motion.p>
 
+        {/* 진행률 */}
+        <ProgressBar current={step} total={3} className="mb-12" />
+
+        {/* Step 1: 성별 선택 */}
         {step === 1 && (
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-center mb-8">상대방의 성별을 선택하세요</h2>
-            <div className="grid grid-cols-2 gap-6">
-              <button
-                onClick={() => handleGenderSelect('male')}
-                className="p-8 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-2xl font-bold transition-all transform hover:scale-105"
-              >
-                👨 남자
-              </button>
-              <button
-                onClick={() => handleGenderSelect('female')}
-                className="p-8 rounded-xl bg-pink-500 hover:bg-pink-600 text-white text-2xl font-bold transition-all transform hover:scale-105"
-              >
-                👩 여자
-              </button>
-            </div>
-          </div>
-        )}
-
-        {step === 2 && (
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-center mb-8">상대방의 MBTI를 선택하세요</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {mbtiTypes.map((mbti) => (
-                <MBTIButton
-                  key={mbti}
-                  mbti={mbti}
-                  onClick={() => handleMBTISelect(mbti)}
+          <motion.div
+            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+              <h2 className="text-3xl font-black text-center mb-8 text-white">
+                사과받을 사람은? 🤔
+              </h2>
+              <div className="grid grid-cols-2 gap-6">
+                <RelationshipCard
+                  icon="👨"
+                  text="남자"
+                  onClick={() => handleGenderSelect('male')}
                 />
-              ))}
+                <RelationshipCard
+                  icon="👩"
+                  text="여자"
+                  onClick={() => handleGenderSelect('female')}
+                />
+              </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
-        {step === 3 && result && (
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h2 className="text-3xl font-bold text-center mb-8 text-purple-600">
-              {selectedMBTI} {gender === 'male' ? '남자' : '여자'}의 사과 받는 법
-            </h2>
-
-            <div className="space-y-6">
-              <div className="bg-red-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold mb-3 text-red-600">🚨 화났을 때 신호</h3>
-                <p className="text-gray-800 text-lg whitespace-pre-line">{result.signal}</p>
+        {/* Step 2: MBTI 선택 */}
+        {step === 2 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20">
+              <h2 className="text-3xl font-black text-center mb-8 text-white">
+                {gender === 'male' ? '👨 남자' : '👩 여자'}의 MBTI는?
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                {mbtiTypes.map((mbti) => (
+                  <MBTIButton
+                    key={mbti}
+                    mbti={mbti}
+                    onClick={() => handleMBTISelect(mbti)}
+                  />
+                ))}
               </div>
-
-              <div className="bg-green-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold mb-3 text-green-600">💚 원하는 사과 방식</h3>
-                <p className="text-gray-800 text-lg whitespace-pre-line">{result.want}</p>
-              </div>
-
-              <div className="bg-orange-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold mb-3 text-orange-600">⚠️ 피해야 할 행동</h3>
-                <p className="text-gray-800 text-lg whitespace-pre-line">{result.avoid}</p>
-              </div>
-
-              <div className="bg-purple-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold mb-3 text-purple-600">💬 사과 예시</h3>
-                <p className="text-gray-800 text-lg whitespace-pre-line italic">{result.example}</p>
+              <div className="text-center">
+                <Button
+                  variant="secondary"
+                  onClick={() => setStep(1)}
+                  className="mt-4"
+                >
+                  ← 이전
+                </Button>
               </div>
             </div>
+          </motion.div>
+        )}
 
-            <AdBanner />
+        {/* Step 3: 결과 - ResultCard 사용 */}
+        {step === 3 && result && selectedMBTI && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ResultCard
+              title={`${selectedMBTI} ${gender === 'male' ? '남자' : '여자'} 사과받는 법`}
+              mbti={selectedMBTI}
+              emoji="💐"
+              mainText="이 방법으로 사과하면 100% 용서!"
+              gradient="from-purple-600 via-pink-600 to-rose-600"
+              subTexts={[
+                "진심이 전달되는 방법",
+                "MBTI 맞춤형 사과"
+              ]}
+            >
+              {/* 간단 요약 */}
+              <div className="w-full space-y-3 mt-6">
+                <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4">
+                  <p className="text-sm leading-relaxed">
+                    "{result.example.substring(0, 80)}..."
+                  </p>
+                </div>
+              </div>
+            </ResultCard>
 
-            <div className="mt-8 flex gap-4">
-              <button
-                onClick={handleReset}
-                className="flex-1 bg-purple-600 text-white py-4 rounded-xl font-bold hover:bg-purple-700 transition-colors"
+            {/* 상세 정보 (ResultCard 외부) */}
+            <motion.div
+              className="mt-8 space-y-6 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              {/* 화났을 때 신호 */}
+              <div className="bg-red-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-red-500/50">
+                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
+                  🚨 화났을 때 신호 (이렇게 하면 빡침)
+                </h3>
+                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
+                  {result.signal}
+                </p>
+              </div>
+
+              {/* 원하는 사과 방식 */}
+              <div className="bg-green-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-green-500/50">
+                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
+                  💚 이 사과가 진심으로 들림!
+                </h3>
+                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
+                  {result.want}
+                </p>
+              </div>
+
+              {/* 피해야 할 행동 */}
+              <div className="bg-orange-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-orange-500/50">
+                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
+                  ⚠️ 이거 하면 더 화남 ㅋㅋ (절대 금지!)
+                </h3>
+                <p className="text-white text-lg leading-relaxed whitespace-pre-line">
+                  {result.avoid}
+                </p>
+              </div>
+
+              {/* 사과 예시 */}
+              <div className="bg-purple-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-purple-500/50">
+                <h3 className="text-2xl font-black mb-4 text-white flex items-center gap-2">
+                  💬 사과 예시 (이대로 따라해봐!)
+                </h3>
+                <div className="bg-black/30 rounded-2xl p-6">
+                  <p className="text-white text-lg leading-relaxed whitespace-pre-line italic">
+                    {result.example}
+                  </p>
+                </div>
+              </div>
+
+              {/* 광고 */}
+              <AdBanner />
+
+              {/* 버튼들 */}
+              <div className="flex gap-4">
+                <Button
+                  onClick={handleReset}
+                  variant="neon"
+                  className="flex-1"
+                >
+                  🔄 다시 하기
+                </Button>
+                <Link href="/" className="flex-1">
+                  <Button variant="secondary" className="w-full">
+                    🏠 홈으로
+                  </Button>
+                </Link>
+              </div>
+
+              {/* 다른 테스트 추천 */}
+              <motion.div
+                className="bg-purple-500/20 backdrop-blur-md rounded-3xl p-6 border-2 border-purple-500/50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
               >
-                다시 하기
-              </button>
-              <Link
-                href="/"
-                className="flex-1 bg-gray-600 text-white py-4 rounded-xl font-bold hover:bg-gray-700 transition-colors text-center"
-              >
-                홈으로
-              </Link>
-            </div>
-          </div>
+                <h3 className="text-xl font-black mb-4 text-white text-center">
+                  🔥 이것도 해보세요!
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <Link href="/angry">
+                    <Button variant="primary" className="w-full text-sm">
+                      😤 화났을 때
+                    </Button>
+                  </Link>
+                  <Link href="/compatibility">
+                    <Button variant="primary" className="w-full text-sm">
+                      💕 궁합 테스트
+                    </Button>
+                  </Link>
+                </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </div>
