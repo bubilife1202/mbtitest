@@ -7,6 +7,7 @@ import { quizQuestions, calculateQuizResult, QuizResult } from '@/data/quiz';
 import { Button, AnimatedTitle } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function QuizPage() {
   const [isStarted, setIsStarted] = useState(false);
@@ -400,6 +401,8 @@ export default function QuizPage() {
           animation: shake 0.5s;
         }
       `}</style>
+
+      <Footer />
     </div>
   );
 }

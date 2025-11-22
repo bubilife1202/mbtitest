@@ -8,6 +8,7 @@ import { balanceQuestions, calculateMBTI, getMBTIResult } from '@/data/balance';
 import { Button, ProgressBar, AnimatedTitle } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function BalancePage() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -410,6 +411,8 @@ export default function BalancePage() {
             </motion.div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );

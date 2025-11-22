@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MBTIType } from '@/types';
 import { MBTIButton, Button, AnimatedTitle, CriticalWarning } from '@/components/ui';
+import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function DatePage() {
   const [selectedMBTI, setSelectedMBTI] = useState<MBTIType | null>(null);
@@ -146,6 +148,9 @@ export default function DatePage() {
               </p>
             </div>
 
+            {/* 광고 */}
+            <AdBanner />
+
             <div className="flex gap-4">
               <Button onClick={() => setSelectedMBTI(null)} variant="neon" className="flex-1">
                 🔄 다시 선택
@@ -158,6 +163,8 @@ export default function DatePage() {
             </div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );

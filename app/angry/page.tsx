@@ -8,6 +8,7 @@ import { getAngryData } from '@/data/angry';
 import { MBTIButton, Button, ProgressBar, AnimatedTitle, RelationshipCard, SurvivalMeter, CriticalWarning, CopyButton } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function AngryPage() {
   const [step, setStep] = useState(1);
@@ -290,6 +291,8 @@ export default function AngryPage() {
             </motion.div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );

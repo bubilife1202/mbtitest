@@ -3,6 +3,7 @@
 import { FeatureCard, AnimatedTitle } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Footer from '@/components/Footer';
 
 // 별 생성 함수
 function createStars(count: number) {
@@ -201,6 +202,8 @@ export default function Home() {
             </p>
           </div>
         </motion.div>
+
+        <Footer />
       </div>
     </>
   );

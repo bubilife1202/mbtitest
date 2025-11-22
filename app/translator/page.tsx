@@ -7,6 +7,7 @@ import { MBTIType, Phrase } from '@/types';
 import { getTranslation, availablePhrases } from '@/data/translator';
 import { MBTIButton, Button, AnimatedTitle, RelationshipCard } from '@/components/ui';
 import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function TranslatorPage() {
   const [step, setStep] = useState(1);
@@ -249,6 +250,15 @@ export default function TranslatorPage() {
                 </div>
               </div>
             </div>
+
+            {/* 로딩 중 광고 */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <AdBanner />
+            </motion.div>
           </motion.div>
         )}
 
@@ -362,6 +372,8 @@ export default function TranslatorPage() {
             </motion.div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );

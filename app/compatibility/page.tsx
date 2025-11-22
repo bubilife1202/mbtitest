@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { MBTIType } from '@/types';
 import { MBTIButton, Button, AnimatedTitle } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
+import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 export default function CompatibilityPage() {
   const [myMBTI, setMyMBTI] = useState<MBTIType | null>(null);
@@ -233,6 +235,9 @@ export default function CompatibilityPage() {
                 </ul>
               </div>
 
+              {/* 광고 */}
+              <AdBanner />
+
               <div className="flex gap-4">
                 <Button onClick={handleReset} variant="neon" className="flex-1">
                   🔄 다시 테스트
@@ -246,6 +251,8 @@ export default function CompatibilityPage() {
             </motion.div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import { getScenarios, getEnding, SimulatorEnding } from '@/data/simulator';
 import { MBTIButton, Button, AnimatedTitle } from '@/components/ui';
 import { ResultCard } from '@/components/ResultCard';
 import AdBanner from '@/components/AdBanner';
+import Footer from '@/components/Footer';
 
 type EmotionLevel = 'happy' | 'neutral' | 'angry' | 'furious';
 
@@ -353,6 +354,8 @@ export default function SimulatorPage() {
             </motion.div>
           </motion.div>
         )}
+
+        <Footer />
       </div>
     </div>
   );
